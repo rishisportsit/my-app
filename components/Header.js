@@ -14,7 +14,6 @@ const Header = () => {
         <div className="header-logo">
           <Link
             href="/"
-            // className={`navLink ${pathname === "/" ? "active" : ""}`} 
           >
             <Image src={gallery.logos.mainLogo} className="logo-img" />
           </Link>
