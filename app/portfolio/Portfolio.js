@@ -5,19 +5,7 @@ function Portfolio() {
       <div>gynfsnion</div>
       <div>gynfsnion</div>
       <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
-      <div>gynfsnion</div>
+      
     </>
   );
 }

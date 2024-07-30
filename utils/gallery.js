@@ -6,7 +6,8 @@ import instagramLogo from "@/public/assests/images/instagram.png";
 import mainLogo from "@/public/assests/images/mainlogo.png";
 // logos
 
-import homeBanner from "@/public/assests/banners/home_banner.jpg"
+import homeBanner from "@/public/assests/banners/home_banner.jpg";
+
 
 export default {
   logos: {
@@ -18,6 +19,6 @@ export default {
   },
 
   banners: {
-    homeBanner
+    homeBanner,
   }
 };
