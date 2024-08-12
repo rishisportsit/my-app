@@ -3,7 +3,8 @@ import Image from "next/image";
 import gallary from "@/utils/gallery";
 import constants from "../constants/constants.json";
 import { useEffect, useState } from "react";
-
+import gallery from "@/utils/gallery";
+import projectData from "../app/data/projectsData.json"
 function Home() {
   const [offsetX, setOffsetX] = useState(0);
   const [isRight, setIsRight] = useState(false);
@@ -74,30 +75,18 @@ function Home() {
           <div className="border_"></div>
         </div>
         <div className="box_wraper">
-          <div className="card">
-            <img
-              src="/api/placeholder/300/200"
+          { projectData.map((project) =>( 
+            <div className="card">
+            <Image
+              src={gallary.banners.vleagueBannner}
               alt="UI Design Book"
               className="card-image"
             />
             <div className="card-content">
-              <h2 className="card-title">My UI design book</h2>
-              <p className="card-subtitle">Book</p>
-              <button onClick={clickHandler}>Click Here</button>
+              <h2 className="card-title">{project.title}</h2>
+              <p className="card-subtitle">{project.description}</p>
             </div>
-          </div>
-          <div className="card">
-            <img
-              src="/api/placeholder/300/200"
-              alt="UI Design Book"
-              className="card-image"
-            />
-            <div className="card-content">
-              <h2 className="card-title">My UI design book</h2>
-              <p className="card-subtitle">Book</p>
-              <button onClick={clickHandler}>Click Here</button>
-            </div>
-          </div>
+          </div>))}
         </div>
       </div>
     </div>
