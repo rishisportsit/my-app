@@ -8,90 +8,74 @@ import gallery from "@/utils/gallery";
 const Header = () => {
   const pathname = usePathname();
 
+  const navItems = [
+    { href: "/about", label: "about" },
+    { href: "/portfolio", label: "portfolio" },
+    { href: "/blog", label: "blog" },
+    { href: "/contact", label: "contact" },
+  ];
+
+  const socialLinks = [
+    {
+      href: "https://twitter.com",
+      logo: gallery.logos.twitterLogo,
+      alt: "Twitter",
+    },
+    {
+      href: "https://linkedin.com",
+      logo: gallery.logos.linkedinLogo,
+      alt: "LinkedIn",
+    },
+    {
+      href: "https://facebook.com",
+      logo: gallery.logos.facebookLogo,
+      alt: "Facebook",
+    },
+    {
+      href: "https://instagram.com",
+      logo: gallery.logos.instagramLogo,
+      alt: "Instagram",
+    },
+  ];
+
   return (
     <>
-      <header className="header">
-        <div className="header-logo">
-          <Link
-            href="/"
-          >
-            <Image src={gallery.logos.mainLogo} className="logo-img" />
-          </Link>
-        </div>
-        <div className="navLinks">
-          <Link
-            href="/about"
-            className={`navLink ${pathname === "/about" ? "active" : ""}`}
-          >
-            about
-          </Link>
-          <Link
-            href="/portfolio"
-            className={`navLink ${pathname === "/portfolio" ? "active" : ""}`}
-          >
-            portfolio
-          </Link>
-          <Link
-            href="/blog"
-            className={`navLink ${pathname === "/blog" ? "active" : ""}`}
-          >
-            blog
-          </Link>
-          <Link
-            href="/contact"
-            className={`navLink ${pathname === "/contact" ? "active" : ""}`}
-          >
-            contact
-          </Link>
-        </div>
-        <div className="socialLinks">
-          <Link
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="img_hover"
-              src={gallery.logos.twitterLogo}
-              alt="Twitter"
-            />
-          </Link>
-          <Link
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="img_hover"
-              src={gallery.logos.linkedinLogo}
-              alt="LinkedIn"
-            />
-          </Link>
-          <Link
-            href="https://facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="img_hover"
-              src={gallery.logos.facebookLogo}
-              alt="Facebook"
-            />
-          </Link>
-          <Link
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="img_hover"
-              src={gallery.logos.instagramLogo}
-              alt="Instagram"
-            />
-          </Link>
-        </div>
-      </header>
-      <footer className="footer"></footer>
+      <div className="header_container">
+        <header className="header">
+          <div className="header-logo">
+            <Link href="/">
+              <Image
+                src={gallery.logos.mainLogo}
+                className="logo-img"
+                alt="Main Logo"
+              />
+            </Link>
+          </div>
+          <nav className="navLinks">
+            {navItems.map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className={`navLink ${pathname === href ? "active" : ""}`}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+          <div className="socialLinks">
+            {socialLinks.map(({ href, logo, alt }) => (
+              <Link
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Image className="img_hover" src={logo} alt={alt} />
+              </Link>
+            ))}
+          </div>
+        </header>
+      </div>
     </>
   );
 };
