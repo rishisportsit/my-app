@@ -1,18 +1,18 @@
 [
   {
-    "src": "gallary.banners.vleagueBannner",
+    "src": "vleagueBannner",
     "alt": "Vleague",
     "title": "Vleague",
     "description": "Vleague Soccer Game"
   },
   {
-    "src": "gallary.banners.defenderBanner",
+    "src": "defenderBanner",
     "alt": "Defender",
     "title": "Defender",
     "description": "Crash Game"
   },
   {
-    "src": "gallary.banners.pick6Baneer",
+    "src": "pick6Baneer",
     "alt": "Pick6",
     "title": "Pick6",
     "description": "Pick6 Soccer Game"

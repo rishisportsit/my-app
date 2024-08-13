@@ -24,7 +24,7 @@
 
       .coder_wrapper,
       .design_wrapper {
-        transition: opacity 0.5s, transform 0.5s;
+        transition: opacity 0.2s, transform 0.5s;
         display: flex;
         align-items: center;
         width: 20%;
@@ -93,12 +93,14 @@
         opacity: 0;
         transform: translateX(-20px);
         pointer-events: none;
+        transition: opacity 0.2s ease , transform 0.5s ease;
       }
 
       .visible {
         opacity: 1;
         transform: translateX(0);
         pointer-events: auto;
+        transition: opacity 0.2s ease , transform 0.5s ease;
       }
     }
   }
