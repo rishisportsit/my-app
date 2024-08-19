@@ -4,16 +4,17 @@ import gallery from "@/utils/gallery";
 import constants from "../constants/constants.json";
 import { useEffect, useState } from "react";
 import projectData from "../app/data/projectsData.json";
-// import { useRouter } from "next/router";
 
 function Home() {
   const [offsetX, setOffsetX] = useState(0);
   const [isRight, setIsRight] = useState(false);
-  // const router = useRouter();
+  const [showWrappers, setShowWrappers] = useState(false);
 
   useEffect(() => {
     const handleMouseMove = (event) => {
-      console.log("event: ", event)
+      if (Window.innerWidth <= 1650) {
+        return;
+      }
       const banner = document.querySelector(".home_banner");
       const { left, width } = banner.getBoundingClientRect();
       const x = event.clientX - left;
@@ -21,6 +22,7 @@ function Home() {
       requestAnimationFrame(() => {
         setOffsetX(newOffsetX);
         setIsRight(x > width / 2);
+        setShowWrappers(true);
       });
     };
     const banner = document.querySelector(".home_banner");
@@ -31,8 +33,22 @@ function Home() {
   const cardHandler = (projectId) => router.push(`/project/${projectId}`);
 
   const BannerContent = ({ isRight, type }) => (
-    <div className={`${type}_wrapper ${isRight ? (type === "coder" ? "visible" : "hidden") : (type === "design" ? "visible" : "hidden")}`}>
-      <span className={`${type}_span`}>{constants[type === "design" ? "combine2" : "combine"]}</span>
+    <div
+      className={`${type}_wrapper ${
+        showWrappers
+          ? isRight
+            ? type === "coder"
+              ? "visible"
+              : "hidden"
+            : type === "design"
+            ? "visible"
+            : "hidden"
+          : "hidden"
+      }`}
+    >
+      <span className={`${type}_span`}>
+        {constants[type === "design" ? "combine2" : "combine"]}
+      </span>
       <span className="span_tag">
         {type === "design"
           ? "Product designer specialising in UI design and Design systems."
@@ -40,7 +56,7 @@ function Home() {
       </span>
     </div>
   );
-  
+
   const LatestWorkHeader = () => (
     <div className="latest_work">
       <div className="border_"></div>
@@ -48,13 +64,16 @@ function Home() {
       <div className="border_"></div>
     </div>
   );
-  
+
   const ProjectCard = ({ project }) => (
     <div className="card" onClick={() => onClick(project.id)}>
       <Image
         src={gallery.banners[project.src]}
         alt={project.title}
         className="card-image"
+        width={500}
+        height={300}
+        layout="responsive"
       />
       <div className="card-content">
         <h2 className="card-title">{project.title}</h2>
@@ -62,7 +81,6 @@ function Home() {
       </div>
     </div>
   );
-  
 
   return (
     <div className="body_wrapper">
@@ -73,9 +91,13 @@ function Home() {
             src={gallery.banners.homeBanner}
             className="home_banner"
             style={{
-              transform: `translateX(${offsetX}px)`,
+              transform:
+                window.innerWidth > 1650 ? `translateX(${offsetX}px)` : "none",
               transition: "transform 0.3s ease-out",
             }}
+            width={1920}
+            height={1080}
+            layout="responsive"
           />
           <BannerContent isRight={isRight} type="coder" />
         </div>

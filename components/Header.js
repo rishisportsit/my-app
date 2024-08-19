@@ -17,12 +17,12 @@ const Header = () => {
 
   const socialLinks = [
     {
-      href: "https://twitter.com",
+      href: "https://x.com/home",
       logo: gallery.logos.twitterLogo,
       alt: "Twitter",
     },
     {
-      href: "https://linkedin.com",
+      href: "https://www.linkedin.com/in/rishi-varma-669219282/",
       logo: gallery.logos.linkedinLogo,
       alt: "LinkedIn",
     },
