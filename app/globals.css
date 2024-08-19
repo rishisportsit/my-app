@@ -1,5 +1,19 @@
 *{
   box-sizing: border-box;
   margin: 0;
-  
+}
+
+.wrapper {
+  animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
