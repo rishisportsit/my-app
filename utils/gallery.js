@@ -13,6 +13,11 @@ import pick6Baneer from "@/public/assests/banners/pick6_banner.png";
 import vleagueBannner from "@/public/assests/banners/vleague_banner.png";
 import renderAdam from "@/public/assests/banners/adam.jpg";
 //Banners
+
+//images
+import pieImage from "@/public/assests/images/pie-chart.png";
+import yoda from "@/public/assests/images/yoda.jpg";
+//images
 export default {
   logos: {
     twitterLogo,
@@ -28,5 +33,10 @@ export default {
     defenderBanner,
     pick6Baneer,
     vleagueBannner,
+  },
+
+  images: {
+    pieImage,
+    yoda,
   },
 };

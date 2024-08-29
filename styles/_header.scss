@@ -18,18 +18,31 @@
     height: 8vh;
     
   }
+
   .header-logo {
     width: 10%;
     height: 100%;
+    @media screen and (max-width: 1280px) {
+      height: 80%;
+    }
     @media (max-width: 770px) {
       display: flex;
       justify-content: center;
+      align-items: center;
+      width: auto;
+      height: 100%;
     }
     .logo-img {
       height: 85%;
       width: 40%;
       filter: brightness(1);
       transition: filter 0.3s ease;
+      @media (max-width: 770px) {
+        height: auto;
+        width: auto;
+        max-height: 25%;
+        max-width: 25%;
+      }
     }
     .logo-img:hover {
       filter: brightness(0.5);
