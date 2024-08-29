@@ -15,7 +15,6 @@
 
     .home_banner {
       width: 60%;
-      margin-top: 60px;
     }
 
     .banner_wrapper {
@@ -49,21 +48,25 @@
         .coder_span,
         .design_span {
           width: auto;
-          font-family: "Josefin Sans", sans-serif;
+          font-family: "proxima nova bold", "Helvetica Neue", Helvetica, Arial,
+            Sans-serif;
           font-weight: 600;
-          font-size: 2.5vw;
-          color: rgb(109, 106, 106);
+          font-size: 3.5vw;
+          color:#333333;
           display: flex;
           align-items: center;
           text-align: center;
+          letter-spacing: -0.05em;
+          text-rendering: optimizeLegibility;
         }
 
         .span_tag {
-          color: rgba(0, 0, 0, 0.452);
+          color: #33333391;
           text-align: center;
           font-size: 0, 5vw;
           font-weight: 600;
           font-family: "Manrope", sans-serif;
+          
         }
       }
 
@@ -91,29 +94,19 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      // padding: 20px;
       box-sizing: border-box;
 
       .latest_span {
-        font-size: 0.9vw;
+        font-size: clamp(15px, 2vw, 24px);
         font-family: "proxima nova semibold", "Helvetica Neue", Helvetica, Arial,
           Sans-serif;
         font-weight: normal;
-        margin: 60px;
+        margin: clamp(20px, 4vw, 60px);
         text-transform: uppercase;
         color: #757575;
         letter-spacing: 0.1rem;
         text-align: center;
-        @media (max-width: 768px) {
-          margin: 50px 0px 10px 0px;
-          font-size: 15px;
-          color: rgba(0, 0, 0, 0.61);
-        }
-        @media (max-width: 1280px) {
-          margin: 80px 0px 20px 0px;
-          font-size: 20px;
-          color: rgba(0, 0, 0, 0.61);
-        }
+        font-size: 1rem;
       }
     }
 
@@ -123,13 +116,13 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 25px;
+      gap: clamp(10px, 2vw, 25px);
 
       .card {
         background-color: white;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         overflow: hidden;
-        width: 320px;
+        width: clamp(280px, calc(100% - 20px), 320px);
         max-width: 100%;
         margin-bottom: 20px;
         transition: box-shadow 0.3s ease;
@@ -149,13 +142,13 @@
         }
 
         &-title {
-          font-size: 18px;
+          font-size: clamp(16px, 2vw, 18px);
           font-weight: bold;
           margin: 0 0 8px 0;
         }
 
         &-subtitle {
-          font-size: 14px;
+          font-size: clamp(12px, 1.5vw, 14px);
           color: #666;
           margin: 0;
         }
@@ -181,22 +174,10 @@
     .banner_wrapper {
       flex-direction: column;
       align-items: center;
-      .home_banner {
-        // width: 100%;
-        margin-right: 30px;
-      }
     }
   }
 
   .work_wrapper {
-    .latest_work {
-      .latest_span {
-        font-size: 3vw;
-        margin-top: 30px;
-        margin-bottom: 30px;
-      }
-    }
-
     .box_wraper {
       .card {
         width: calc(50% - 20px);
@@ -221,15 +202,6 @@
   }
 
   .work_wrapper {
-    .latest_work {
-      .latest_span {
-        font-size: 6vw;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        padding: 0;
-      }
-    }
-
     .box_wraper {
       .card {
         width: 100%;

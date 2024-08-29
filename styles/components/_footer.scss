@@ -1,6 +1,5 @@
 .footer_head {
   height: 70px;
-  //   background-color: #f5f5f5;
   .backToTop {
     display: flex;
     justify-content: center;
@@ -11,7 +10,6 @@
       background-color: #f5f5f5;
       width: 130px;
       border-radius: 50% 50% 0 0;
-      //   margin-bottom: -70px;
       position: absolute;
       top: -60px;
       box-shadow: inset 0px 3px 0px 0px rgba(0, 0, 0, 0.1);
@@ -43,9 +41,17 @@
         .port_span {
           color: #757575;
           letter-spacing: 0.1rem;
+          display: none;
+          @media (min-width: 1122px) {
+            display: inline;
+          }
         }
       }
       .navLinks {
+        display: none;
+        @media (min-width: 1122px) {
+          display: block;
+        }
         .navLink {
           text-decoration: none;
           color: #757575;
