@@ -14,7 +14,7 @@ const Footer = () => {
   ];
 
   function handleTop() {
-    window.scrollTo({top: 0, behavior: "smooth"})
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
   return (
     <div className="footer_head">

@@ -7,6 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Portfolio",
+  port: 1423
 };
 
 export default function RootLayout({ children }) {
@@ -15,7 +16,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <div className="wrapper">
           <Header />
-          {children}
+          <div className="children">{children}</div>
         </div>
         <Footer />
       </body>
