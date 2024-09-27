@@ -4,7 +4,6 @@ import gallery from "@/utils/gallery";
 import constants from "../constants/constants.json";
 import { useEffect, useState } from "react";
 import projectData from "../app/data/projectsData.json";
-import constantsData from "../constants/constants.json";
 
 function Home() {
   const [offsetX, setOffsetX] = useState(0);
@@ -61,7 +60,7 @@ function Home() {
   const LatestWorkHeader = () => (
     <div className="latest_work">
       <div className="border_"></div>
-      <span className="latest_span">{constantsData?.latestWork}</span>
+      <span className="latest_span">SOME OF MY LATEST WORK</span>
       <div className="border_"></div>
     </div>
   );
@@ -100,7 +99,7 @@ function Home() {
             height={1080}
             layout="responsive"
           />
-            <BannerContent isRight={isRight} type="coder" />
+          <BannerContent isRight={isRight} type="coder" />
         </div>
       </div>
       <div className="work_wrapper">
