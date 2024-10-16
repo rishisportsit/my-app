@@ -55,13 +55,16 @@
     align-items: center;
     gap: 40px;
     font-size: 17px;
-    // font-family: "Manrope", sans-serif;
     letter-spacing: 0.1rem;
     font-family: "proxima nova light", "Helvetica Neue", Helvetica, Arial,
       Sans-serif;
     background-color: black;
+
     @media (max-width: 770px) {
-      display: none;
+      // display: none;
+      height: 440%;
+      background-color: #333333;
+
     }
     .navLink {
       text-decoration: none;
@@ -90,8 +93,50 @@
         // background-color: rgba(0, 0, 0, 0.082);
       }
     }
-  }
+    @media (max-width: 770px) {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      flex-direction: column;
+      background-color: black;
+      display: none;
+      padding: 10px 0;
 
+      &.active {
+        display: flex;
+      }
+    }
+  }
+  .hamburger {
+    display: none; // Hidden on desktop
+    flex-direction: column; // Stack bars vertically
+    cursor: pointer;
+    gap: 5px;
+    // Spacing between bars
+
+    .bar {
+      width: 25px; // Bar width
+      height: 3px; // Bar height
+      background-color: white;
+      transition: all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1); // Smoother transition
+
+      &.open:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      &.open:nth-child(2) {
+        opacity: 0; // Middle bar disappears
+      }
+      &.open:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+    }
+
+    @media (max-width: 770px) {
+      display: flex; // Show hamburger on mobile
+
+    }
+  }
   .socialLinks {
     display: flex;
     justify-content: center;
@@ -155,10 +200,6 @@
     top: -90px;
     opacity: 0;
   }
-}
-
-.header.leaving {
-  animation: header_slideup 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 // @media (max-width: 1445px) {
