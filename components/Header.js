@@ -1,11 +1,13 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import gallery from "@/utils/gallery";
 
 const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
   const navItems = [
@@ -38,6 +40,10 @@ const Header = () => {
     },
   ];
 
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <>
       <div className="header_container">
@@ -51,12 +57,18 @@ const Header = () => {
               />
             </Link>
           </div>
-          <nav className="navLinks">
+          <div className="hamburger" onClick={toggleMenu}>
+            <span className={`bar ${menuOpen ? "open" : ""}`}></span>
+            <span className={`bar ${menuOpen ? "open" : ""}`}></span>
+            <span className={`bar ${menuOpen ? "open" : ""}`}></span>
+          </div>
+          <nav className={`navLinks ${menuOpen ? "active" : ""}`}>
             {navItems.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
                 className={`navLink ${pathname === href ? "active" : ""}`}
+                onClick={() => setMenuOpen(false)} // Close the menu when a link is clicked
               >
                 {label}
               </Link>

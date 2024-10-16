@@ -118,6 +118,15 @@
             align-items: center;
             margin-bottom: 70px;
             gap: 20px;
+            transition: filter 0.3s ease;
+
+            &:hover {
+              filter: brightness(0.8);
+
+              .spriteIconsSpan {
+                filter: brightness(0.8);
+              }
+            }
 
             @include responsive(ipad-pro) {
               width: calc(50% - 5px);
@@ -147,6 +156,7 @@
             }
             .spriteIconsSpan {
               font-size: 1.1rem;
+              transition: filter 0.3s ease;
 
               @include responsive(ipad-pro) {
                 font-size: 1.08rem;
