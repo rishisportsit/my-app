@@ -71,7 +71,8 @@
       position: relative;
       color: #ffffffde;
       transition: all 0.3s ease;
-      &:hover {
+
+      &:hover, &.active {
         color: rgb(134, 134, 134);
       }
       &::after {

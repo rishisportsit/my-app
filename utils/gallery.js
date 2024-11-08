@@ -33,7 +33,6 @@ export default {
     facebookLogo,
     instagramLogo,
     mainLogo,
-    
   },
 
   banners: {
@@ -43,11 +42,11 @@ export default {
     pick6Baneer,
     vleagueBannner,
     designLogo,
+    yoda,
   },
 
   images: {
     pieImage,
-    yoda,
   },
 
   spriteIcons: {

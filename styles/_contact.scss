@@ -60,8 +60,6 @@
       }
 
       .contact {
-        animation: slideInFromLeft 1s ease-out 1s;
-        animation-fill-mode: both;
         .contact_title {
           font-family: "proxima nova bold", "Helvetica Neue", Helvetica, Arial,
             Sans-serif;
@@ -174,8 +172,6 @@
         }
       }
       .designphoto {
-        animation: slideInFromRight 1s ease-out 1s;
-        animation-fill-mode: both;
         .designbanner {
           width: 670px;
           height: 480px;
@@ -206,28 +202,6 @@
     }
   }
   .story2 {
-    // Empty ruleset removed
-  }
-}
-
-@keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideInFromRight {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
+    padding: 30px 30px 0px 30px;
   }
 }
