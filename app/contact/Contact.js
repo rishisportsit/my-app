@@ -63,14 +63,14 @@ export default function Contact() {
 
     // Name validation
     if (!name || name.trim().length < 2) {
-      newErrors.name = "Name must be at least 2 characters long";
+      newErrors.name = "Please Enter Valid Name";
       isValid = false;
     }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email || !emailRegex.test(email)) {
-      newErrors.email = "Please enter a valid email address";
+      newErrors.email = "Please Enter a Valid Email Address";
       isValid = false;
     }
 
