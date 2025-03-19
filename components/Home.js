@@ -7,10 +7,10 @@ import projectData from "../app/data/projectsData.json";
 import { motion, AnimatePresence } from "framer-motion";
 
 const BannerContent = memo(({ isRight, type, windowWidth }) => {
-  const isVisible = type === "design" ? !isRight : isRight;
-  const content = type === "design" 
-    ? { text: constants.combine2, description: "Product designer specialising in UI design and Design systems." }
-    : { text: constants.combine, description: "Front end developer who writes clean, elegant and efficient code." };
+  const isVisible = type === "coder" ? !isRight : isRight;
+  const content = type === "coder" 
+    ? { text: constants.combine, description: "Front end developer who writes clean, elegant and efficient code." }
+    : { text: constants.combine2, description: "Product designer specialising in UI design and Design systems." };
   
   return (
     <motion.div
@@ -121,17 +121,17 @@ const HoverPopup = memo(({ showPopup }) => (
           <div className="popup-icon">
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
               className="rotating-element"
             />
           </div>
           <motion.h3 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="popup-title">
-            Hover to reveal the interactive parallax effect!
+            Hover banner to reveal effect!
           </motion.h3>
           {/* <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="popup-text">
             Hover across the banner to reveal the interactive parallax effect!
           </motion.p> */}
-          <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 10 }} className="popup-timer" />
+          <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 5 }} className="popup-timer" />
         </div>
       </motion.div>
     )}

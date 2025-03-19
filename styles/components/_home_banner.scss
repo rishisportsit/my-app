@@ -295,31 +295,16 @@
   }
   
   .coder_wrapper,
-  .design_wrapper {
-    width: 90%;
-    margin: 20px 0;
+  .design_wrapper,
+  .banner-popup {
+    display: none;
   }
-  
-  .coder_wrapper { order: 2; }
-  .design_wrapper { order: 0; }
-  
-  .coder_span,
-  .design_span { font-size: clamp(20px, 4vw, 32px) !important; }
-  
-  .span_tag { font-size: clamp(12px, 2vw, 16px) !important; }
   
   .card { width: calc(50% - 20px); }
-  
-  .banner-popup {
-    max-width: 200px;
-    top: 20px;
-    transform: none;
-  }
 }
 
 @media (max-width: 600px) {
   .card { width: 100%; }
-  .banner-popup { max-width: 180px; }
 }
 
 @media screen and (min-width: 1280px) and (max-width: 1440px) {
