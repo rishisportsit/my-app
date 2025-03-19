@@ -1,20 +1,74 @@
 [
   {
+    "id": "1",
     "src": "vleagueBannner",
     "alt": "Vleague",
-    "title": "Vleague",
-    "description": "Vleague Soccer Game"
+    "title": "Vleague Soccer Game",
+    "description": "An immersive soccer gaming experience",
+    "fullDescription": "A revolutionary soccer game that combines realistic physics with strategic gameplay. Features include real-time multiplayer matches, advanced AI opponents, and a comprehensive team management system.",
+    "overview": "VLeague represents the next generation of soccer gaming, combining cutting-edge technology with intuitive gameplay mechanics.",
+    "features": [
+      "Real-time multiplayer matches with up to 22 players",
+      "Advanced AI system for realistic opponent behavior",
+      "Comprehensive team management and strategy system",
+      "Dynamic weather effects and stadium environments",
+      "Custom tournament creation and league management"
+    ],
+    "challenges": [
+      "Implementing precise physics for realistic ball movement",
+      "Creating responsive multiplayer networking",
+      "Balancing AI difficulty for engaging gameplay"
+    ],
+    "technologies": ["Unity", "C#", "Photon Networking", "Firebase"],
+    "github": "https://github.com/yourusername/vleague",
+    "live": "https://vleague-demo.com"
   },
   {
+    "id": "2",
     "src": "defenderBanner",
     "alt": "Defender",
-    "title": "Defender",
-    "description": "Crash Game"
+    "title": "Defender Crash Game",
+    "description": "High-octane arcade-style crash game",
+    "fullDescription": "An action-packed crash game where players must defend their territory against waves of incoming threats. Features dynamic difficulty scaling, power-ups, and global leaderboards.",
+    "overview": "Defender pushes the boundaries of arcade gaming with its innovative crash mechanics and strategic gameplay elements.",
+    "features": [
+      "Progressive difficulty system that adapts to player skill",
+      "Unique power-up combinations and special abilities",
+      "Global leaderboard and achievement system",
+      "Multiple game modes and challenge levels",
+      "Custom vehicle customization options"
+    ],
+    "challenges": [
+      "Implementing complex collision detection systems",
+      "Creating balanced power-up mechanics",
+      "Optimizing performance for mobile devices"
+    ],
+    "technologies": ["Unity", "C#", "PlayFab", "AWS"],
+    "github": "https://github.com/yourusername/defender",
+    "live": "https://defender-game.com"
   },
   {
+    "id": "3",
     "src": "pick6Baneer",
     "alt": "Pick6",
-    "title": "Pick6",
-    "description": "Pick6 Soccer Game"
+    "title": "Pick6 Soccer Game",
+    "description": "Strategic soccer team management simulator",
+    "fullDescription": "A deep soccer management simulation where players build and manage their dream team. Includes realistic player statistics, transfer market mechanics, and competitive league play.",
+    "overview": "Pick6 revolutionizes soccer management games with its deep statistical analysis and real-time strategy elements.",
+    "features": [
+      "Advanced player statistics and development system",
+      "Real-time transfer market with AI-driven economics",
+      "Complex team chemistry and formation tactics",
+      "Season-long campaigns with dynamic events",
+      "Multiplayer league system with friend challenges"
+    ],
+    "challenges": [
+      "Creating realistic player progression algorithms",
+      "Implementing complex market value calculations",
+      "Building responsive real-time multiplayer systems"
+    ],
+    "technologies": ["React", "Node.js", "MongoDB", "Socket.io"],
+    "github": "https://github.com/yourusername/pick6",
+    "live": "https://pick6-game.com"
   }
 ]

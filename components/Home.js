@@ -189,8 +189,9 @@ function Home() {
     };
   }, [initialLoadComplete]);
 
+  // Replace the existing cardHandler with:
   const cardHandler = (projectId) => {
-    console.log(`Navigating to project ${projectId}`);
+    window.location.href = `/portfolio?id=${projectId}`;
   };
 
   return (
