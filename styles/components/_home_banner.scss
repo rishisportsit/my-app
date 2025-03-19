@@ -1,211 +1,332 @@
-@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap");
 
 .body_wrapper {
   height: 100%;
   width: 100%;
-
-  .bannermain_wrapper {
-    width: 100%;
-    height: 100%;
-    box-shadow: 0px 0px 10px 0px rgb(194, 186, 186);
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-
-    .home_banner {
-      width: 60%;
-    }
-
-    .banner_wrapper {
-      display: flex;
-      justify-content: center;
-      height: auto;
-      width: 70%;
-
-      .banner_image {
-        object-fit: cover;
-      }
-
-      .coder_wrapper,
-      .design_wrapper {
-        transition: opacity 0.5s ease, transform 0.5s ease;
-        display: flex;
-        align-items: center;
-        width: 100%;
-        max-width: 300px;
-        padding: 20px;
-      }
-
-      .coder_wrapper,
-      .design_wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-
-        .coder_span,
-        .design_span {
-          width: auto;
-          font-family: "proxima nova bold", "Helvetica Neue", Helvetica, Arial,
-            Sans-serif;
-          font-weight: 600;
-          font-size: 3.5vw;
-          color:#333333;
-          display: flex;
-          align-items: center;
-          text-align: center;
-          letter-spacing: -0.05em;
-          text-rendering: optimizeLegibility;
-        }
-
-        .span_tag {
-          color: #33333391;
-          text-align: center;
-          font-size: 0, 5vw;
-          font-weight: 600;
-          font-family: "Manrope", sans-serif;
-          
-        }
-      }
-
-      .hidden {
-        opacity: 0;
-        transform: translateX(-20px);
-        pointer-events: none;
-        transition: opacity 1s ease, transform 1s ease-in;
-      }
-
-      .visible {
-        opacity: 1;
-        transform: translateX(0);
-        pointer-events: auto;
-        transition: opacity 1s ease, transform 1s ease-in;
-      }
-    }
-  }
-
-  .work_wrapper {
-    height: auto;
-
-    .latest_work {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-sizing: border-box;
-
-      .latest_span {
-        font-size: clamp(15px, 2vw, 24px);
-        font-family: "proxima nova semibold", "Helvetica Neue", Helvetica, Arial,
-          Sans-serif;
-        font-weight: normal;
-        margin: clamp(20px, 4vw, 60px);
-        text-transform: uppercase;
-        color: #757575;
-        letter-spacing: 0.1rem;
-        text-align: center;
-        font-size: 1rem;
-      }
-    }
-
-    .box_wraper {
-      margin: 0;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: clamp(10px, 2vw, 25px);
-
-      .card {
-        background-color: white;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        width: clamp(280px, calc(100% - 20px), 320px);
-        max-width: 100%;
-        margin-bottom: 20px;
-        transition: box-shadow 0.3s ease;
-
-        &:hover {
-          box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        &-image {
-          width: 100%;
-          object-fit: cover;
-          border: white 10px solid;
-        }
-
-        &-content {
-          padding: 16px;
-        }
-
-        &-title {
-          font-size: clamp(16px, 2vw, 18px);
-          font-weight: bold;
-          margin: 0 0 8px 0;
-        }
-
-        &-subtitle {
-          font-size: clamp(12px, 1.5vw, 14px);
-          color: #666;
-          margin: 0;
-        }
-      }
-    }
-  }
 }
 
-@media (max-width: 1600px) {
+.bannermain_wrapper {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 0 10px rgb(194, 186, 186);
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.banner_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1800px;
+  position: relative;
+}
+
+.banner_image_container {
+  width: 60%;
+  max-width: 1200px;
+  z-index: 1;
+}
+
+.home_banner {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.coder_wrapper,
+.design_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 20%;
+  min-width: 180px;
+  padding: 20px;
+  transition: .5s ease;
+  z-index: 10;
+}
+
+.coder_span,
+.design_span {
+  font-family: "proxima nova bold", Helvetica, Arial, Sans-serif;
+  font-weight: 600;
+  font-size: clamp(18px, 3vw, 48px);
+  color: #333;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -.05em;
+  text-rendering: optimizeLegibility;
+}
+
+.span_tag {
+  color: #33333391;
+  text-align: center;
+  font-size: clamp(12px, 1vw, 16px);
+  font-weight: 600;
+  font-family: "Manrope", sans-serif;
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateX(-20px);
+  pointer-events: none;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.hidden,
+.visible {
+  transition: .3s ease;
+}
+
+.banner-popup {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  transform: translateY(-50%);
+  z-index: 100;
+  max-width: 280px;
+  width: 100%;
+}
+
+.popup-content {
+  background: rgba(255, 255, 255, .95);
+  backdrop-filter: blur(8px);
+  border-radius: 0 12px 12px 0;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, .1),
+              0 5px 15px rgba(0, 0, 0, .07),
+              0 0 0 1px rgba(0, 0, 0, .03),
+              0 0 30px rgba(31, 38, 135, .15);
+  border-left: 4px solid #4361ee;
+  position: relative;
+  overflow: hidden;
+}
+
+.popup-content::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(67, 97, 238, .1) 0%, transparent 70%);
+  animation: pulse 10s infinite;
+  z-index: -1;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(.8); opacity: 0; }
+  50% { transform: scale(1); opacity: 1; }
+}
+
+.popup-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.rotating-element {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: conic-gradient(#4361ee, #3f37c9, #4895ef, #4cc9f0, #4361ee);
+  position: relative;
+}
+
+.rotating-element::before,
+.rotating-element::after {
+  content: "";
+  position: absolute;
+}
+
+.rotating-element::before {
+  inset: 5px;
+  background: white;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.rotating-element::after {
+  content: "↑";
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #4361ee;
+  font-size: 18px;
+  z-index: 2;
+}
+
+.popup-title {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #333;
+  margin: 0 0 10px;
+  text-align: center;
+}
+
+.popup-text {
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.popup-timer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(to right, #4361ee, #4cc9f0);
+  transform-origin: left;
+}
+
+.work_section {
+  position: relative;
+  z-index: 2;
+  isolation: isolate;
+}
+
+.work_wrapper {
+  padding: 20px 10px;
+  position: relative;
+}
+
+.latest_work {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.border_ {
+  height: 1px;
+  background-color: #e0e0e0;
+  flex-grow: 1;
+  max-width: 200px;
+}
+
+.latest_span {
+  font: normal clamp(15px, 2vw, 24px) "proxima nova semibold", Helvetica, Arial, Sans-serif;
+  margin: clamp(20px, 4vw, 60px);
+  text-transform: uppercase;
+  color: #757575;
+  letter-spacing: .1rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.box_wraper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: clamp(15px, 3vw, 30px);
+  margin: 0;
+}
+
+.card {
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, .1);
+  width: clamp(280px, calc(33% - 30px), 400px);
+  margin-bottom: 20px;
+  transition: .3s ease;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card:hover {
+  box-shadow: 0 8px 12px rgba(0, 0, 0, .2);
+}
+
+.card-image {
+  width: 100%;
+  object-fit: cover;
+  border: white 10px solid;
+}
+
+.card-content {
+  padding: 16px;
+}
+
+.card-title {
+  font-size: clamp(16px, 2vw, 18px);
+  font-weight: bold;
+  margin: 0 0 8px;
+}
+
+.card-subtitle {
+  font-size: clamp(12px, 1.5vw, 14px);
+  color: #666;
+  margin: 0;
+}
+
+@media (max-width: 1200px) {
+  .coder_span,
+  .design_span { font-size: clamp(16px, 2.5vw, 36px); }
+  .span_tag { font-size: clamp(10px, .9vw, 14px); }
+  .banner-popup { max-width: 240px; }
+}
+
+@media (max-width: 990px) {
   .banner_wrapper {
-    .coder_wrapper,
-    .design_wrapper {
-      display: none !important;
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .bannermain_wrapper {
     flex-direction: column;
-    align-items: center;
-
-    .banner_wrapper {
-      flex-direction: column;
-      align-items: center;
-    }
+    padding: 20px 0;
   }
-
-  .work_wrapper {
-    .box_wraper {
-      .card {
-        width: calc(50% - 20px);
-      }
-    }
+  
+  .banner_image_container {
+    width: 90%;
+    order: 1;
+  }
+  
+  .coder_wrapper,
+  .design_wrapper {
+    width: 90%;
+    margin: 20px 0;
+  }
+  
+  .coder_wrapper { order: 2; }
+  .design_wrapper { order: 0; }
+  
+  .coder_span,
+  .design_span { font-size: clamp(20px, 4vw, 32px) !important; }
+  
+  .span_tag { font-size: clamp(12px, 2vw, 16px) !important; }
+  
+  .card { width: calc(50% - 20px); }
+  
+  .banner-popup {
+    max-width: 200px;
+    top: 20px;
+    transform: none;
   }
 }
 
-@media (max-width: 480px) {
-  .banner_wrapper {
-    .coder_wrapper,
-    .design_wrapper {
-      .coder_span,
-      .design_span {
-        font-size: 6vw;
-      }
+@media (max-width: 600px) {
+  .card { width: 100%; }
+  .banner-popup { max-width: 180px; }
+}
 
-      .span_tag {
-        font-size: 6vw;
-      }
-    }
-  }
-
-  .work_wrapper {
-    .box_wraper {
-      .card {
-        width: 100%;
-      }
-    }
-  }
+@media screen and (min-width: 1280px) and (max-width: 1440px) {
+  .banner_wrapper { max-width: 1200px; }
+  .banner_image_container { width: 55%; }
+  .coder_wrapper, 
+  .design_wrapper { width: 22%; }
+  .coder_span,
+  .design_span { font-size: clamp(16px, 2vw, 30px); }
 }
