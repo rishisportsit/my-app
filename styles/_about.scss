@@ -1,6 +1,6 @@
 .about-wrapper {
   .story1 {
-    padding: 30px;
+    padding: 30px 30px 0 30px;
     border-bottom: 1px solid #ddd;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 
@@ -472,7 +472,7 @@
 
 @media (min-width: 1024px) {
   .about-wrapper .story1 {
-    padding: 70px;
+    padding: 70px 70px 0 70px;
 
     .about_collapse {
       .about {

@@ -2,15 +2,13 @@
 import Image from "next/image";
 import constants from "../../constants/constants.json";
 import gallery from "@/utils/gallery";
-import ChartComponent from "@/components/SkillsChart";
 import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
 
 const About = () => {
   const { about, info, aboutdescrip, part2Head, part1Head, randomyoda } =
     constants;
   const {
-    banners: { renderAdam, yoda },
+    banners: { renderAdam, yoda , meBanner },
   } = gallery;
 
   const skills = [
@@ -115,7 +113,8 @@ const About = () => {
               stiffness: 150,
             }}
           >
-            <Image src={renderAdam} className="img" alt="Adam" />
+            <Image src={meBanner}  className="img" alt="Adam" />
+            {/* <Image src={renderAdam} className="img" alt="Adam" /> */}
           </motion.div>
         </div>
       </motion.div>

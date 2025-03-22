@@ -19,12 +19,12 @@
 }
 .children{
   /* margin-top: 80px;` */
-  padding: 80px 0px ;
+  padding: 60px 0px ;
 }
 
 @media screen and (max-width: 1024px) {
   .children {
-    padding: 46px 0px;
+    padding: 40px 0px;
   }
 }
 
@@ -36,6 +36,6 @@
 
 @media screen and (max-width: 480px) {
   .children {
-    padding: 54px 0px;
+    padding: 0px;
   }
 }

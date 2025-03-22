@@ -4,6 +4,7 @@ import constants from "../../constants/constants.json";
 import gallery from "@/utils/gallery";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
 
 const SocialIcon = ({ src, alt, label, color }) => (
   <motion.div
@@ -94,23 +95,26 @@ export default function Contact() {
     setStatus("sending");
 
     try {
-      const res = await fetch("/api/sendEmail", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await emailjs.send(
+        'service_3b6h32y',
+        'template_t84vyzj',
+        {
+          name: name,
+          email: email,
+          message: message,
+          time: new Date().toLocaleString('en-US', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          })
         },
-        body: JSON.stringify({
-          name,
-          email,
-          message,
-          recipientEmail: process.env.RECIPIENT_EMAIL,
-          smtpUser: "rishivarma9090@gmail.com",
-          smtpPass: "Varmarishi@123",
-        }),
-      });
+        'Bm9TmMUABi1BjLcM5'
+      );
 
-      const data = await res.json();
-      if (data.message === "Email sent successfully!") {
+      if (response.status === 200) {
         setStatus("success");
         setName("");
         setEmail("");

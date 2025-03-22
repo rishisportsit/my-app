@@ -13,6 +13,7 @@ import defenderBanner from "@/public/assests/banners/defender_banner.png";
 import pick6Baneer from "@/public/assests/banners/pick6_banner.png";
 import vleagueBannner from "@/public/assests/banners/vleague_banner.png";
 import renderAdam from "@/public/assests/banners/adam.jpg";
+import meBanner from "@/public/assests/banners/image.png";
 //Banners
 
 //images
@@ -43,6 +44,7 @@ export default {
     vleagueBannner,
     designLogo,
     yoda,
+    meBanner
   },
 
   images: {

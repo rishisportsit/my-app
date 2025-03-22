@@ -15,6 +15,7 @@
   overflow: hidden;
   position: relative;
   z-index: 1;
+
 }
 
 .banner_wrapper {
@@ -286,7 +287,7 @@
 @media (max-width: 990px) {
   .banner_wrapper {
     flex-direction: column;
-    padding: 20px 0;
+    padding:  0px;
   }
   
   .banner_image_container {
