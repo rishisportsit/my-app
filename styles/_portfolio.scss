@@ -24,8 +24,12 @@
     position: relative;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 6rem 2rem;
+    padding:  0rem 2rem;
     z-index: 2;
+
+    @media (max-width: 768px) {
+      padding: 2rem 1rem;  // Reduced padding for mobile
+    }
   }
 
   &__title {
@@ -35,37 +39,50 @@
     color: #333;
     font-weight: bold;
     cursor: pointer;
-    white-space: nowrap; // Add this to prevent wrapping
+    white-space: nowrap;
+    width: 100%;
+    overflow-x: auto;  // Change from hidden to auto
+    -webkit-overflow-scrolling: touch; // Better touch scrolling
+    padding: 2rem 1rem;  // Increased padding
     
     @media (max-width: 768px) {
       font-size: 2.5rem;
-      overflow-x: hidden; // Add this to handle overflow
-      padding: 0 10px; // Add some padding
+      margin: 0 auto;  // Center the title
+      padding: 1rem;
+      max-width: 100%;
+      overflow-x: visible;  // Allow content to be visible
+      white-space: normal;  // Allow wrapping on mobile
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.25rem;  // Add gap between letters
     }
     
     .char-container {
       display: inline-block;
       position: relative;
-      padding: 0 5px;
+      padding: 0 0.2rem;
       height: 100%;
-    }
-    
-    .thread {
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 2px;
-      height: 100px;
-      background: linear-gradient(to bottom, 
-        transparent,
-        rgba(128, 128, 128, 0.2) 20%,
-        rgba(128, 128, 128, 0.4) 40%,
-        rgba(128, 128, 128, 0.6)
-      );
-      transform-origin: top center;
-      pointer-events: none;
-      opacity: 0;
-      transform: translateX(-50%) translateY(-100%);
+      
+      .thread {
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        width: 2px;
+        height: 150px;  // Made longer
+        background: linear-gradient(to bottom, 
+          rgba(169, 169, 169, 0.9),    // Dark gray start
+          rgba(169, 169, 169, 0.7) 60%,  // Medium gray middle
+          rgba(169, 169, 169, 0.4) 80%,  // Light gray end
+          transparent
+        );
+        transform-origin: bottom center;
+        pointer-events: none;
+        opacity: 1;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
     }
     
     .char {
@@ -74,29 +91,13 @@
       transform-style: preserve-3d;
       perspective: 1000px;
       cursor: grab;
-      touch-action: none; // Enable smooth dragging on touch devices
+      touch-action: none;
       
-      &:active {
-        cursor: grabbing;
-      }
-      
-      &:hover {
-        z-index: 5;
-      }
-    
-      .petal {
-        pointer-events: none;
-        filter: blur(1px);
-        box-shadow: 0 0 10px currentColor;
-        
-        &::after {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: inherit;
-          filter: blur(2px);
-          opacity: 0.5;
-        }
+      @media (max-width: 768px) {
+        font-size: 2rem;  // Explicit font size for mobile
+        margin: 0 2px;    // Add spacing between characters
+        transform: none;  // Remove any transforms
+        will-change: transform;  // Optimize performance
       }
     }
   }

@@ -105,9 +105,9 @@ const Portfolio = () => {
     const chars = text.split('');
     titleRef.current.innerHTML = chars
       .map((char, i) => `
-        <span class="char-container" style="display: inline-block;">
-          <span class="thread"></span>
-          <span class="char" style="display: inline-block;" data-char="${char}">${char}</span>
+        <span class="char-container" style="display: inline-block; position: relative;">
+          <span class="thread" style="transform-origin: top;"></span>
+          <span class="char" style="display: inline-block; position: relative;" data-char="${char}">${char}</span>
         </span>
       `).join('');
   

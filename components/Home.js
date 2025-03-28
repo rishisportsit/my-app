@@ -4,23 +4,22 @@ import gallery from "@/utils/gallery";
 import constants from "../constants/constants.json";
 import { useEffect, useState, useRef, memo } from "react";
 import projectData from "../app/data/projectsData.json";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const BannerContent = memo(({ isRight, type, windowWidth }) => {
-  const isVisible = type === "coder" ? !isRight : isRight;
   const content = type === "coder" 
     ? { text: constants.combine, description: "Front end developer who writes clean, elegant and efficient code." }
     : { text: constants.combine2, description: "Product designer specialising in UI design and Design systems." };
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 1, y: 0 }}
       animate={{
-        opacity: windowWidth <= 990 ? 1 : (isVisible ? 1 : 0),
-        y: windowWidth <= 990 ? 0 : (isVisible ? [-20, 20] : -20),
+        opacity: 1,
+        y: windowWidth <= 990 ? 0 : [-20, 20],  // Always animate regardless of isRight
         transition: {
           opacity: { duration: 0.5 },
-          y: isVisible && windowWidth > 990 ? {
+          y: windowWidth > 990 ? {
             duration: 2,
             repeat: Infinity,
             repeatType: "reverse",
@@ -28,19 +27,19 @@ const BannerContent = memo(({ isRight, type, windowWidth }) => {
           } : { duration: 0.5 }
         },
       }}
-      className={`${type}_wrapper ${windowWidth <= 990 ? 'visible' : (isVisible ? 'visible' : 'hidden')}`}
+      className={`${type}_wrapper visible`}
     >
       <motion.span
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: windowWidth <= 990 ? 1 : (isVisible ? 1 : 0.8), opacity: windowWidth <= 990 ? 1 : (isVisible ? 1 : 0) }}
+        initial={{ scale: 1, opacity: 1 }}
+        animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
         className={`${type}_span`}
       >
         {content.text}
       </motion.span>
       <motion.span
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: windowWidth <= 990 ? 1 : (isVisible ? 1 : 0), x: windowWidth <= 990 ? 0 : (isVisible ? 0 : -20) }}
+        initial={{ opacity: 1, x: 0 }}
+        animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.4 }}
         className="span_tag"
       >
@@ -107,42 +106,11 @@ const ProjectCard = memo(({ project, onCardClick }) => (
   </motion.div>
 ));
 
-const HoverPopup = memo(({ showPopup }) => (
-  <AnimatePresence>
-    {showPopup && (
-      <motion.div
-        className="banner-popup"
-        initial={{ x: -300, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        exit={{ x: -300, opacity: 0 }}
-        transition={{ type: "spring", damping: 15, stiffness: 100 }}
-      >
-        <div className="popup-content">
-          <div className="popup-icon">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-              className="rotating-element"
-            />
-          </div>
-          <motion.h3 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="popup-title">
-            Hover banner to reveal effect!
-          </motion.h3>
-          {/* <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="popup-text">
-            Hover across the banner to reveal the interactive parallax effect!
-          </motion.p> */}
-          <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 5 }} className="popup-timer" />
-        </div>
-      </motion.div>
-    )}
-  </AnimatePresence>
-));
+
 function Home() {
   const [offsetX, setOffsetX] = useState(0);
   const [isRight, setIsRight] = useState(false);
   const [windowWidth, setWindowWidth] = useState(0);
-  const [showPopup, setShowPopup] = useState(false);
-  const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   const bannerRef = useRef(null);
   
   useEffect(() => {
@@ -169,17 +137,6 @@ function Home() {
 
     setWindowWidth(window.innerWidth);
     
-    if (!initialLoadComplete) {
-      const timer = setTimeout(() => {
-        setShowPopup(true);
-        setTimeout(() => {
-          setShowPopup(false);
-          setInitialLoadComplete(true);
-        }, 3000);
-      }, 1000);
-      return () => clearTimeout(timer);
-    }
-
     window.addEventListener("resize", handleResize);
     bannerRef.current?.addEventListener("mousemove", handleMouseMove);
     
@@ -187,9 +144,8 @@ function Home() {
       window.removeEventListener("resize", handleResize);
       bannerRef.current?.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [initialLoadComplete]);
+  }, []);
 
-  // Replace the existing cardHandler with:
   const cardHandler = (projectId) => {
     window.location.href = `/portfolio?id=${projectId}`;
   };
@@ -202,7 +158,6 @@ function Home() {
       className="body_wrapper"
     >
       <div className="bannermain_wrapper" ref={bannerRef}>
-        <HoverPopup showPopup={showPopup} />
         <div className="banner_wrapper">
           <BannerContent isRight={isRight} type="design" windowWidth={windowWidth} />
           <motion.div
@@ -212,14 +167,14 @@ function Home() {
             className="banner_image_container"
           >
             <Image
-              src={gallery.banners.homeBanner}
+              src={gallery.banners.homeeBanner}
               className="home_banner"
               style={{
                 transform: windowWidth > 1650 ? `translateX(${offsetX}px)` : "none",
                 transition: "transform 0.3s ease-out",
               }}
-              width={1920}
-              height={1080}
+              width={1120}
+              height={580}
               layout="responsive"
               priority
             />

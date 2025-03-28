@@ -1,15 +1,13 @@
 "use client";
-import MyIcons from "@/public/assests/svg/MyIcons";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React from "react";
 
 const Footer = () => {
   const pathname = usePathname();
   const navItems = [
     { href: "/about", label: "about" },
     { href: "/portfolio", label: "portfolio" },
-    { href: "/blog", label: "blog" },
     { href: "/contact", label: "contact" },
   ];
 
@@ -34,7 +32,7 @@ const Footer = () => {
       <div className="footer_wrapper">
         <div className="footer_content">
           <div className="port_name">
-            <span className="port_span">© 2024 Rishi Varma</span>
+            <span className="port_span">© 2025 Rishi Varma</span>
           </div>
           <nav className="navLinks">
             {navItems.map(({ href, label }) => (

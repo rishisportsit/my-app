@@ -233,9 +233,12 @@ export default function Contact() {
             transition={{ duration: 0.8 }}
           >
             <Image
-              src={gallery.banners.designLogo}
+              src={gallery.banners.contact2}
               alt="designbanner"
               className="designbanner"
+              width={500}    
+              height={400}   
+              priority      
             />
           </motion.div>
         </div>
