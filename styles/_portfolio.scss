@@ -8,11 +8,58 @@
   font-family: 'Manrope', sans-serif;
 
   // ── Floating theme toggle ─────────────────────────────────────────
-  &__theme-toggle {
+  &__theme-toggle-wrap {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
     z-index: 500;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    pointer-events: none; // Let clicks pass through empty space
+
+    @media (max-width: 600px) {
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+
+    * { pointer-events: all; }
+  }
+
+  &__theme-hint {
+    background: #111;
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    line-height: 1.35;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    position: relative;
+    white-space: nowrap;
+    text-align: right;
+
+    strong {
+        color: #fca311; // Gaming accent color (orange/yellow)
+        font-weight: 800;
+        letter-spacing: 0.05em;
+    }
+
+    // Triangle pointer
+    &::after {
+      content: '';
+      position: absolute;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      border-width: 6px 0 6px 8px;
+      border-style: solid;
+      border-color: transparent transparent transparent #111;
+    }
+  }
+
+  &__theme-toggle {
+    position: relative;
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.14);
     border-radius: 50%;
@@ -23,7 +70,7 @@
     justify-content: center;
     backdrop-filter: blur(8px);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-    transition: background 0.2s ease, box-shadow 0.2s ease;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 
     &:hover {
       background: rgba(255, 255, 255, 0.15);
@@ -31,14 +78,20 @@
     }
 
     [data-theme="light"] & {
-      background: rgba(0, 0, 0, 0.06);
-      border-color: rgba(0, 0, 0, 0.12);
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+      background: #ffffff;
+      border-color: rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 
       &:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background: #f5f5f5;
+        transform: scale(1.05);
       }
     }
+  }
+
+  @keyframes float-hint {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
   }
 
   &__parallax-bg {
@@ -190,6 +243,27 @@
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45),
                 0 0 0 1px rgba(255, 255, 255, 0.04);
     cursor: pointer;
+
+    // Light mode refined card style
+    [data-theme="light"] & {
+      // Subtle gradient for depth instead of flat white
+      background: linear-gradient(to bottom, #ffffff 0%, #f9f9fb 100%);
+      
+      box-shadow: 
+        0 4px 6px -1px rgba(0, 0, 0, 0.02),
+        0 12px 32px -4px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.06), // Delicate border
+        inset 0 1px 0 rgba(255, 255, 255, 1); // Top highlight
+      
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 
+          0 20px 48px -6px rgba(0, 0, 0, 0.12),
+          0 0 0 1px rgba(0, 0, 0, 0.04);
+      }
+    }
 
     @media (max-width: 640px) { border-radius: 10px; }
     @media (max-width: 480px) { border-radius: 8px; }
@@ -396,6 +470,11 @@
         line-height: 1.55;
         font-size: 0.875rem;
 
+        [data-theme="light"] & {
+          color: #555; // Darker text for better contrast on white cards
+          font-weight: 500;
+        }
+
         @media (max-width: 900px)  { font-size: 0.8rem; line-height: 1.45; }
         // Show description on mobile now that we have space (1 column)
         @media (max-width: 600px)  { display: block; font-size: 0.85rem; }
@@ -415,6 +494,11 @@
     padding: 1.5rem;
     font-family: 'Manrope', sans-serif;
 
+    [data-theme="light"] & {
+      background: rgba(255, 255, 255, 0.15); // Glassy light backdrop
+      backdrop-filter: blur(20px);
+    }
+
     @media (max-width: 900px) { padding: 1rem; }
     @media (max-width: 600px) { padding: 0.5rem; align-items: flex-end; }
 
@@ -428,6 +512,15 @@
       overflow: hidden;
       border: 1px solid var(--modal-border);
       box-shadow: 0 60px 120px rgba(0,0,0,0.7);
+
+      [data-theme="light"] & {
+        background: #ffffff;
+        background: linear-gradient(145deg, #ffffff 0%, #f4f4f7 100%);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        box-shadow: 
+          0 20px 50px -12px rgba(0,0,0,0.1),
+          0 0 0 1px rgba(255,255,255,0.5) inset; // subtle inner glow
+      }
 
       // Tablet: shrink left panel
       @media (max-width: 900px) {
@@ -844,10 +937,6 @@
     &__title {
       font-size: 3rem;
       white-space: normal;
-    }
-
-    &__projects {
-      grid-template-columns: 1fr;
     }
 
     &__modal {

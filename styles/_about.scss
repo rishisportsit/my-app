@@ -1,4 +1,9 @@
 .about-wrapper {
+  // Force dark text since About page has white background
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  
   .story1 {
     padding: 30px 30px 0 30px;
     border-bottom: 1px solid #ddd;

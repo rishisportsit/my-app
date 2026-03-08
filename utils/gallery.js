@@ -44,6 +44,20 @@ import spinWheelThumbnail from "@/public/assests/thumbnails/Spin the wheel.jpg";
 import vleagueThumbnail from "@/public/assests/thumbnails/V-League-thumbnail_230x300.jpg";
 import vpsThumbnail from "@/public/assests/thumbnails/VPS.jpg";
 import defenderThumbnail from "@/public/assests/thumbnails/defender-soccer-thumbnail__230x300.jpg";
+import ossinoThumbnail from "@/public/assests/thumbnails/ossino_thumb.png";
+import fasfasThumbnail from "@/public/assests/thumbnails/fasfas_thumb.png";
+
+// Extra images for slideshows
+import fasfas2 from "@/public/assests/fasfas/fasfas2.png";
+import fasfas3 from "@/public/assests/fasfas/fasfas3.png";
+import fasfas4 from "@/public/assests/fasfas/fasfas4.png";
+import fasfas5 from "@/public/assests/fasfas/fasfas5.png";
+
+import ossino2 from "@/public/assests/ossino/ossino2.png";
+import ossino3 from "@/public/assests/ossino/ossino3.png";
+import ossino4 from "@/public/assests/ossino/ossino4.png";
+import ossino5 from "@/public/assests/ossino/ossino5.png";
+import ossino6 from "@/public/assests/ossino/ossino6.png";
 //Thumbnails
 
 export default {
@@ -93,5 +107,9 @@ export default {
     vleagueThumbnail,
     vpsThumbnail,
     defenderThumbnail,
+    ossinoThumbnail,
+    fasfasThumbnail,
+    fasfas2, fasfas3, fasfas4, fasfas5,
+    ossino2, ossino3, ossino4, ossino5, ossino6
   },
 };

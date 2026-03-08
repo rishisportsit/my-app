@@ -52,7 +52,7 @@ const About = () => {
     { point: "I'm into Frontend development" },
     { point: "I love to eat" },
     { point: "I'm a bit of a dirt freak" },
-    { point: "I live in Hyderabad" },
+    { point: "I live in Paris, France" },
     { point: "I'm slightly addicted to Instagram" },
     { point: "stack is my mentor" },
   ];
