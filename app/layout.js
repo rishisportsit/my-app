@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Portfolio",
-  port: 1423
+  port: 1423,
 };
 
 export const viewport = {

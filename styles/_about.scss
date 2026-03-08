@@ -209,9 +209,14 @@
                       line-height: 1.5;
                       
                        strong {
-                        font-weight: 600;
+                        font-weight: 700;
                         margin-right: 5px;
-                        color: var(--text-primary);
+                        color: #111; /* Force black */
+                       }
+                       
+                       .skills-text {
+                           color: #333; /* Darker than text-secondary */
+                           font-weight: 500;
                        }
                        
                        .show-more-skills {
