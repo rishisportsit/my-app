@@ -6,42 +6,52 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import emailjs from '@emailjs/browser';
 
-const SocialIcon = ({ src, alt, label, color }) => (
-  <motion.div
-    className="social-icon-container"
-    whileHover={{
-      scale: 1.2,
-      rotate: [0, -10, 10, -10, 0],
-      transition: { duration: 0.3 },
-    }}
-    whileTap={{ scale: 0.9 }}
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{
-      type: "spring",
-      stiffness: 300,
-      damping: 20,
-    }}
-  >
-    <Image
-      src={src}
-      className={`${alt.toLowerCase()}sprite`}
-      alt={alt}
-      width={50}
-      height={50}
-    />
-    <motion.span
-      className="spriteIconsSpan"
-      style={{ color: color }}
+const SocialIcon = ({ src, alt, label, color, href }) => {
+  const content = (
+    <motion.div
+      className="social-icon-container"
       whileHover={{
-        scale: 1.1,
-        textShadow: "0px 0px 8px rgba(0,0,0,0.2)",
+        scale: 1.2,
+        rotate: [0, -10, 10, -10, 0],
+        transition: { duration: 0.3 },
+      }}
+      whileTap={{ scale: 0.9 }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{
+        type: "spring",
+        stiffness: 300,
+        damping: 20,
       }}
     >
-      {label}
-    </motion.span>
-  </motion.div>
-);
+      <Image
+        src={src}
+        className={`${alt.toLowerCase()}sprite`}
+        alt={alt}
+        width={50}
+        height={50}
+      />
+      <motion.span
+        className="spriteIconsSpan"
+        style={{ color: color }}
+        whileHover={{
+          scale: 1.1,
+          textShadow: "0px 0px 8px rgba(0,0,0,0.2)",
+        }}
+      >
+        {label}
+      </motion.span>
+    </motion.div>
+  );
+
+  return href ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', display: 'block' }}>
+      {content}
+    </a>
+  ) : (
+    content
+  );
+};
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -145,6 +155,7 @@ export default function Contact() {
       alt: "Instagram",
       label: "Instagram",
       color: "#C13584",
+      href: "https://www.instagram.com/_mr.varma?igsh=aWdzZXJhem0wdW9w&utm_source=qr"
     },
     {
       src: gallery.spriteIcons.twsprite,
@@ -157,6 +168,7 @@ export default function Contact() {
       alt: "LinkedIn",
       label: "LinkedIn",
       color: "#0A66C2",
+      href: "https://www.linkedin.com/in/rishi-varma-669219282/",
     },
   ];
 

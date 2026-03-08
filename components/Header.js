@@ -33,7 +33,7 @@ const Header = () => {
       alt: "Facebook",
     },
     {
-      href: "https://instagram.com",
+      href: "https://www.instagram.com/_mr.varma?igsh=aWdzZXJhem0wdW9w&utm_source=qr",
       logo: gallery.logos.instagramLogo,
       alt: "Instagram",
     },

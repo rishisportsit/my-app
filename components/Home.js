@@ -289,12 +289,36 @@ function Home() {
                     <h3 style={{ fontSize: "clamp(1.2rem, 3vw, 1.8rem)", marginBottom: "0.8rem", color: "#fff", fontFamily: "sans-serif" }}>{project.title}</h3>
                     <p style={{ fontSize: "clamp(0.85rem, 2vw, 1rem)", lineHeight: "1.6", color: "#bbb", marginBottom: "1rem", fontFamily: "sans-serif" }}>{project.description}</p>
                     {project.layout === "mobile" && (
-                        <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: "10px", color: "#fca311", fontSize: "0.9rem" }}>
+                        <div style={{ 
+                          marginTop: "auto", 
+                          display: "inline-flex", 
+                          alignItems: "center", 
+                          gap: "8px", 
+                          color: "#e2e8f0", 
+                          fontSize: "0.85rem",
+                          background: "rgba(255, 255, 255, 0.1)",
+                          padding: "6px 12px",
+                          borderRadius: "20px",
+                          width: "fit-content",
+                          fontWeight: "500"
+                        }}>
                           <span>📱 Mobile Optimized</span>
                         </div>
                     )}
                     {project.layout === "desktop" && (
-                        <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: "10px", color: "#fca311", fontSize: "0.9rem" }}>
+                        <div style={{ 
+                          marginTop: "auto", 
+                          display: "inline-flex", 
+                          alignItems: "center", 
+                          gap: "8px", 
+                          color: "#e2e8f0", 
+                          fontSize: "0.85rem",
+                          background: "rgba(255, 255, 255, 0.1)",
+                          padding: "6px 12px",
+                          borderRadius: "20px",
+                          width: "fit-content",
+                          fontWeight: "500"
+                        }}>
                           <span>🖥️ Desktop Platform</span>
                         </div>
                     )}
