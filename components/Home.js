@@ -16,7 +16,7 @@ const BannerContent = memo(({ isRight, type, windowWidth }) => {
       initial={{ opacity: 1, y: 0 }}
       animate={{
         opacity: 1,
-        y: windowWidth <= 990 ? 0 : [-20, 20],  // Always animate regardless of isRight
+        y: windowWidth <= 990 ? 0 : [-20, 20],  
         transition: {
           opacity: { duration: 0.5 },
           y: windowWidth > 990 ? {
@@ -82,7 +82,7 @@ const ProjectCard = memo(({ project, onCardClick }) => (
     onClick={() => onCardClick(project.id)}
   >
     <Image
-      src={gallery.banners[project.src]}
+    src={gallery.thumbnails[project.src]}
       alt={project.title}
       className="card-image"
       width={500}
@@ -192,7 +192,7 @@ function Home() {
         >
           <LatestWorkHeader />
           <div className="box_wraper">
-            {projectData.map((project) => (
+            {projectData.slice(0, 3).map((project) => (
               <ProjectCard key={project.id} project={project} onCardClick={cardHandler} />
             ))}
           </div>

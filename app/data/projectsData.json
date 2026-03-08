@@ -1,74 +1,266 @@
 [
   {
     "id": "1",
-    "src": "vleagueBannner",
-    "alt": "Vleague",
-    "title": "Vleague Soccer Game",
-    "description": "An immersive soccer gaming experience",
-    "fullDescription": "A revolutionary soccer game that combines realistic physics with strategic gameplay. Features include real-time multiplayer matches, advanced AI opponents, and a comprehensive team management system.",
-    "overview": "VLeague represents the next generation of soccer gaming, combining cutting-edge technology with intuitive gameplay mechanics.",
+    "src": "vleagueThumbnail",
+    "alt": "V-League",
+    "title": "V-League Soccer",
+    "description": "Real-time multiplayer soccer with a production-grade wrapper API architecture",
+    "fullDescription": "V-League Soccer is a full-stack, production-grade multiplayer soccer platform engineered with Next.js 14 (App Router) and React on the frontend, backed by a NestJS + Node.js microservice exposing a strongly-typed GraphQL API. The entire game loop — team selection, live match state, and scoreboard sync — is rendered on HTML Canvas using a custom interpolation engine that keeps visuals silky-smooth regardless of network jitter. Critically, no game client ever communicates directly with the underlying betting infrastructure. All wagering operations flow through an internal NestJS Wrapper API layer — a dedicated abstraction service that normalises bet placement requests, enforces KYC compliance gates, manages wallet debits/credits, and handles settlement callbacks. This wrapper pattern isolates the game from platform-specific betting contracts, making the system portable and auditable.",
+    "overview": "A production multiplayer soccer platform where real-time Canvas rendering meets a rigorously layered wrapper API architecture — every bet, KYC check, and wallet operation routed through a dedicated NestJS abstraction service.",
     "features": [
-      "Real-time multiplayer matches with up to 22 players",
-      "Advanced AI system for realistic opponent behavior",
-      "Comprehensive team management and strategy system",
-      "Dynamic weather effects and stadium environments",
-      "Custom tournament creation and league management"
+      "Real-time multiplayer match engine with Canvas interpolation for smooth cross-client rendering",
+      "Strongly-typed GraphQL API delivering live match state, player stats, and odds in a single request",
+      "NestJS Wrapper API layer as the sole interface for all wagering — frontend never talks directly to the bet engine",
+      "Pre-wager KYC compliance gate enforced at the wrapper layer before any stake is submitted",
+      "Full tournament bracket system with TypeScript-safe match scheduling and automated progression logic"
     ],
     "challenges": [
-      "Implementing precise physics for realistic ball movement",
-      "Creating responsive multiplayer networking",
-      "Balancing AI difficulty for engaging gameplay"
+      "Designing a wrapper API contract flexible enough to abstract multiple bet engine versions without breaking game clients",
+      "Synchronising Canvas match state across concurrent clients with sub-50ms event delivery via GraphQL subscriptions",
+      "Enforcing idempotent bet submission at the wrapper layer to prevent double-placement under network retry conditions"
     ],
-    "technologies": ["Unity", "C#", "Photon Networking", "Firebase"],
-    "github": "https://github.com/yourusername/vleague",
-    "live": "https://vleague-demo.com"
+    "technologies": ["Next.js", "React", "TypeScript", "NestJS", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "vleague"
   },
   {
     "id": "2",
-    "src": "defenderBanner",
-    "alt": "Defender",
-    "title": "Defender Crash Game",
-    "description": "High-octane arcade-style crash game",
-    "fullDescription": "An action-packed crash game where players must defend their territory against waves of incoming threats. Features dynamic difficulty scaling, power-ups, and global leaderboards.",
-    "overview": "Defender pushes the boundaries of arcade gaming with its innovative crash mechanics and strategic gameplay elements.",
+    "src": "defenderThumbnail",
+    "alt": "Defender Soccer",
+    "title": "Defender Soccer",
+    "description": "High-velocity arcade soccer powered by a Vite-optimised React frontend and Node.js wrapper APIs",
+    "fullDescription": "Defender Soccer delivers sub-frame arcade action built with React + TypeScript on a Vite frontend for near-instant HMR and optimised production bundles. The game loop is a custom Canvas engine running at a locked 60fps, driven by a Node.js backend serving GraphQL subscriptions for live event delivery. All wagering, balance management, and session state are handled exclusively through an internal Wrapper API service — a Node.js middleware layer that translates game events into standardised bet commands, routes them to the downstream bet engine, and returns normalised settlement payloads back to the client. The frontend never holds credentials or communicates with the bet infrastructure directly, making the attack surface minimal and the system auditable by design.",
+    "overview": "60fps Canvas arcade soccer where reflexes win bets — a Vite + React frontend talks only to a Node.js Wrapper API, which exclusively owns all communication with the bet engine.",
     "features": [
-      "Progressive difficulty system that adapts to player skill",
-      "Unique power-up combinations and special abilities",
-      "Global leaderboard and achievement system",
-      "Multiple game modes and challenge levels",
-      "Custom vehicle customization options"
+      "Locked 60fps Canvas game loop with Vite-optimised asset pipeline for minimal load time",
+      "Node.js Wrapper API translating game events into idempotent bet commands — zero direct client-to-engine calls",
+      "GraphQL subscriptions delivering live score, odds, and settlement state with <30ms latency",
+      "TypeScript-safe game logic with discriminated union event types across the full stack",
+      "Session token refresh and KYC validation handled transparently at the wrapper layer"
     ],
     "challenges": [
-      "Implementing complex collision detection systems",
-      "Creating balanced power-up mechanics",
-      "Optimizing performance for mobile devices"
+      "Sustaining 60fps Canvas rendering while processing high-frequency wrapper API settlement webhooks concurrently",
+      "Designing the wrapper API's event normalisation layer to remain agnostic of the downstream bet engine's schema",
+      "Handling crash-round settlement edge cases idempotently at the wrapper layer under network retry storms"
     ],
-    "technologies": ["Unity", "C#", "PlayFab", "AWS"],
-    "github": "https://github.com/yourusername/defender",
-    "live": "https://defender-game.com"
+    "technologies": ["React", "TypeScript", "Vite", "Node.js", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "defender"
   },
   {
     "id": "3",
-    "src": "pick6Baneer",
-    "alt": "Pick6",
-    "title": "Pick6 Soccer Game",
-    "description": "Strategic soccer team management simulator",
-    "fullDescription": "A deep soccer management simulation where players build and manage their dream team. Includes realistic player statistics, transfer market mechanics, and competitive league play.",
-    "overview": "Pick6 revolutionizes soccer management games with its deep statistical analysis and real-time strategy elements.",
+    "src": "howzzatThumbnail",
+    "alt": "Howzzat",
+    "title": "Howzzat Cricket",
+    "description": "Fantasy cricket simulation with NestJS wrapper APIs decoupling the game from the bet engine",
+    "fullDescription": "Howzzat Cricket is an immersive fantasy sports platform engineered with Next.js 14 and React on the frontend, with a NestJS + TypeScript backend exposing a rich GraphQL API. The match engine simulates over-by-over cricket in real time on HTML Canvas, with a proprietary scoring algorithm factoring player form, pitch conditions, and live randomness seeded server-side. The architecture's defining feature is its NestJS Wrapper API Service — a dedicated backend module that sits between the game and the underlying betting infrastructure. All bet placement, KYC verification, wallet credits/debits, and settlement callbacks are mediated through this wrapper, which normalises platform-specific responses into clean domain models the game client consumes. The frontend is completely decoupled: it queries the GraphQL API, which internally delegates to the wrapper service — no bet engine endpoint is ever exposed to the browser.",
+    "overview": "Over-by-over fantasy cricket simulation where a NestJS Wrapper API Service is the sole gatekeeper between the game and all wagering operations — clean domain models, zero platform leakage.",
     "features": [
-      "Advanced player statistics and development system",
-      "Real-time transfer market with AI-driven economics",
-      "Complex team chemistry and formation tactics",
-      "Season-long campaigns with dynamic events",
-      "Multiplayer league system with friend challenges"
+      "Proprietary Canvas cricket simulation engine with over-by-over ball-by-ball rendering and live player stats",
+      "NestJS Wrapper API Service mediating 100% of bet placement, KYC, wallet, and settlement flows",
+      "GraphQL API with DataLoader-optimised resolvers for fantasy team selection and live player performance data",
+      "Server-side seeded match randomness — outcomes generated and attested at the wrapper layer before client delivery",
+      "TypeScript-safe scoring models with strict domain separation between simulation logic and wagering contracts"
     ],
     "challenges": [
-      "Creating realistic player progression algorithms",
-      "Implementing complex market value calculations",
-      "Building responsive real-time multiplayer systems"
+      "Building a statistically accurate cricket simulation algorithm whose output satisfies fairness audits at the wrapper layer",
+      "Designing the NestJS wrapper service to handle concurrent in-play bet mutations while the Canvas match state is live",
+      "Preventing match-outcome inference attacks by ensuring the wrapper layer never leaks RNG seeds in GraphQL responses"
     ],
-    "technologies": ["React", "Node.js", "MongoDB", "Socket.io"],
-    "github": "https://github.com/yourusername/pick6",
-    "live": "https://pick6-game.com"
+    "technologies": ["Next.js", "React", "NestJS", "TypeScript", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "howzzat"
+  },
+  {
+    "id": "4",
+    "src": "rocketBoomThumbnail",
+    "alt": "RocketBoom",
+    "title": "Rocket Boom",
+    "description": "Provably fair crash game — Vite + React UI, NestJS wrapper API owning the full bet lifecycle",
+    "fullDescription": "Rocket Boom is a high-stakes crash game where a multiplier climbs from 1× until a cryptographically determined bust point ends the round. The frontend is React + TypeScript bundled with Vite, giving designers and developers fast iteration cycles while producing a lean production bundle. The NestJS backend exposes GraphQL subscriptions that push the live multiplier stream to all clients simultaneously. At the core of the system is a NestJS Wrapper API — an isolated microservice that generates and attests provably fair bust points using HMAC-SHA256 chain verification, accepts bet placement and auto cash-out instructions from the game, routes them to the underlying bet engine, and publishes normalised settlement events back to GraphQL subscribers. The game client is architecturally blind to the bet engine: it only ever consumes wrapper API responses.",
+    "overview": "Watch the multiplier climb and cash out before the bust — a Vite-powered React UI consuming a NestJS Wrapper API that owns provably fair generation, bet execution, and settlement end to end.",
+    "features": [
+      "Canvas rocket animation driven by sub-50ms wrapper API multiplier events via GraphQL subscription",
+      "HMAC-SHA256 provably fair bust-point generation and public attestation endpoint served by the wrapper layer",
+      "Auto cash-out instructions processed atomically at the wrapper API before settlement is confirmed to the game",
+      "Vite-optimised React + TypeScript frontend with code-split routes and pre-fetched GraphQL fragments",
+      "Wallet debit, round settlement, and balance reconciliation all exclusive to the NestJS wrapper service"
+    ],
+    "challenges": [
+      "Achieving <100ms end-to-end latency from wrapper API bust event to Canvas animation halt across global clients",
+      "Building a provably fair HMAC chain that remains verifiable by users without exposing the server seed at round start",
+      "Designing the wrapper API's atomic cash-out transaction to be race-condition-safe under thousands of concurrent requests"
+    ],
+    "technologies": ["React", "TypeScript", "Vite", "NestJS", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "rocketBoom"
+  },
+  {
+    "id": "5",
+    "src": "minesThumbnail",
+    "alt": "Mines",
+    "title": "Mines",
+    "description": "Grid-based mine strategy game — Next.js frontend, NestJS wrapper service owning seed generation and settlement",
+    "fullDescription": "Mines is a strategic tile-reveal game where players uncover a configurable grid seeking safe tiles that compound their payout multiplier, while evading hidden mines that end the round instantly. Built with Next.js + TypeScript on the frontend and a NestJS + Node.js backend with a GraphQL query/mutation API, the architecture is defined by its Wrapper API Service. Before each round, the NestJS wrapper generates a cryptographic server seed, applies it to produce a sealed mine layout, and issues a hashed commitment to the client. Tile reveals are mutation calls to the wrapper — never direct hits to the bet engine — and the wrapper responds with the reveal result, updated multiplier, and a signed payload. On cashout, the wrapper finalises settlement, reconciles the wallet, and publishes the full seed for client-side fairness verification. The game client is entirely stateless with respect to wagering.",
+    "overview": "Escalating tension on every tile — a Next.js UI issuing reveal mutations exclusively to a NestJS Wrapper API that owns server-seed generation, multiplier computation, and provably fair settlement.",
+    "features": [
+      "Canvas tile-reveal and mine-explosion animations driven by wrapper API mutation responses",
+      "NestJS Wrapper API generating sealed server seeds before round start, with hash commitment published to the client",
+      "GraphQL mutations for tile reveals returning signed multiplier payloads — zero direct bet engine exposure",
+      "Configurable mine density (1–24) with mathematically balanced multiplier curves computed at the wrapper layer",
+      "Auto-cashout threshold enforced server-side at the wrapper — client cannot be manipulated into over-running"
+    ],
+    "challenges": [
+      "Designing a multiplier curve in TypeScript that is simultaneously player-attractive and operator-margin-compliant",
+      "Ensuring the wrapper API's seed commitment scheme is tamper-proof — the mine layout cannot be inferred before reveal",
+      "Processing per-tile reveal mutations atomically at the wrapper layer to prevent double-reveal exploits under concurrency"
+    ],
+    "technologies": ["Next.js", "TypeScript", "Node.js", "NestJS", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "mines"
+  },
+  {
+    "id": "6",
+    "src": "plinkoThumbnail",
+    "alt": "Plinko",
+    "title": "Plinko",
+    "description": "Physics-driven peg-board game — Vite + React UI, NestJS wrapper API controlling all ball outcomes and payouts",
+    "fullDescription": "Plinko is a visually stunning physics peg-board game where a ball descends through rows of staggered pegs before landing in a multiplier bucket. The React + Vite frontend runs a custom Canvas physics engine that simulates realistic collision and gravity — but the ball's final bucket is always server-authoritative. Before each drop, the NestJS Wrapper API generates the outcome server-side and seals it. The Canvas animation is then crafted to converge on that result — every bounce is cosmetically computed to land precisely where the wrapper dictates, eliminating any possibility of client-side outcome manipulation. All bet staking, payout calculations, risk-tier configuration, and wallet settlement are exclusively owned by the wrapper service. The GraphQL API delivers outcomes as normalised events, and the client consumes them without ever knowing which downstream engine produced them.",
+    "overview": "Mesmerising peg-board physics on Canvas — but every ball's destiny is sealed by the NestJS Wrapper API before the first bounce, with bets and payouts flowing exclusively through the wrapper layer.",
+    "features": [
+      "Canvas physics engine computing ball trajectories designed to converge on server-authoritative wrapper API outcomes",
+      "NestJS Wrapper API sealing bucket outcomes before drop, eliminating any client-side result inference",
+      "Three risk tiers (low / medium / high) with TypeScript-computed payout tables maintained at the wrapper layer",
+      "GraphQL mutation-per-drop flow — staking, outcome delivery, and wallet credit all processed atomically by the wrapper",
+      "Multi-drop auto-play with configurable stop-loss and profit-target thresholds enforced server-side"
+    ],
+    "challenges": [
+      "Reverse-engineering the Canvas physics parameters so visually simulated paths always converge to the wrapper-determined bucket",
+      "Balancing cross-tier payout distributions at the wrapper layer to maintain operator margin without visible pattern bias",
+      "Sustaining smooth 60fps Canvas animation during high-frequency multi-drop auto-play with concurrent GraphQL mutations"
+    ],
+    "technologies": ["React", "TypeScript", "Vite", "NestJS", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "plinko"
+  },
+  {
+    "id": "7",
+    "src": "diamondsThumbnail",
+    "alt": "Diamonds",
+    "title": "Diamonds",
+    "description": "Progressive gem-picking game — Next.js + React frontend, NestJS wrapper API owning seed, multiplier, and settlement logic",
+    "fullDescription": "Diamonds is an addictive round-based gem-picking game where each successful selection advances the player up a multiplier ladder, while a wrong gem ends the run and forfeits the stake. Built with Next.js 14 App Router and React on the frontend and a NestJS + TypeScript + GraphQL backend, the architecture centres on a NestJS Wrapper API that controls the entire wagering lifecycle. Before each round, the wrapper generates a sealed gem layout using a server-side cryptographic seed and issues a hash commitment. As the player picks, the wrapper processes each reveal mutation — validating the pick, updating the multiplier, and either advancing the round or triggering settlement. On cashout, the wrapper atomically executes the payout, reconciles the wallet, and publishes the seed for independent verification. The game client only knows what the wrapper tells it — gem positions are never pre-computed or exposed.",
+    "overview": "Climb the multiplier ladder gem by gem — the NestJS Wrapper API exclusively owns the sealed gem layout, per-pick reveal logic, and all settlement, keeping the game client fully stateless for wagering.",
+    "features": [
+      "Canvas gem-reveal animations synced to wrapper API mutation responses with 0 optimistic rendering",
+      "NestJS Wrapper API issuing round-start seed commitments and processing pick reveals with TypeScript-validated multiplier progression",
+      "Atomic cashout transaction at the wrapper layer — payout, wallet credit, and round closure executed in a single DB transaction",
+      "GraphQL subscriptions pushing live session state to the UI — active bet, current multiplier, and round history",
+      "Server-side post-round seed reveal enabling player-facing fairness verification without any client-side secrets"
+    ],
+    "challenges": [
+      "Designing a multiplier ladder in TypeScript that escalates attractively while satisfying the operator's RTP requirements across all grid sizes",
+      "Ensuring the wrapper API's per-pick mutation is atomic and replay-safe under concurrent session conflicts",
+      "Building a seed commitment scheme cryptographically strong enough to withstand pre-image attacks before round completion"
+    ],
+    "technologies": ["Next.js", "React", "TypeScript", "NestJS", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "diamonds"
+  },
+  {
+    "id": "8",
+    "src": "diceThumbnail",
+    "alt": "Dice",
+    "title": "Dice",
+    "description": "Provably fair over/under dice — React + TypeScript frontend, Node.js wrapper API with HMAC-SHA256 fairness chain",
+    "fullDescription": "Dice is the purest expression of provably fair gambling: pick a target number, decide over or under, and let the server roll. The frontend is React + TypeScript, and the backend is a Node.js + GraphQL service centred around a Wrapper API layer. The wrapper owns the complete fairness chain — it generates a server seed, hashes it, and publishes the hash to the client before the roll. After the roll, the raw seed is revealed so the client can independently verify the outcome using HMAC-SHA256. All bet staking, win/loss evaluation, payout calculation, and wallet settlement are processed exclusively by the wrapper; the React client only submits roll parameters and receives normalised results. An auto-roll engine built in TypeScript supports martingale, D'Alembert, and custom step strategies, all throttled and validated server-side by the wrapper to prevent abuse.",
+    "overview": "Over/under dice with a full HMAC-SHA256 provably fair chain — the Node.js Wrapper API generates seeds, attests outcomes, and owns every bet and payout before the Canvas animation plays.",
+    "features": [
+      "Full HMAC-SHA256 provably fair chain: server seed hashed pre-roll by the wrapper, raw seed revealed post-settlement for client verification",
+      "Node.js Wrapper API exclusively processing stake validation, win/loss evaluation, and real-time wallet settlement",
+      "Adjustable win-chance slider (1–98%) with live payout multiplier previewed from wrapper-computed probability tables",
+      "Canvas dice roll animation triggered only after the wrapper confirms the authoritative outcome",
+      "TypeScript auto-roll strategy engine (martingale, D'Alembert, custom) with server-side abuse throttling at the wrapper layer"
+    ],
+    "challenges": [
+      "Designing a wrapper API fairness chain where the HMAC seed commitment is verifiable post-round without leaking the outcome pre-roll",
+      "Keeping Canvas animation perceptually instantaneous during rapid auto-roll cycles without blocking the wrapper's mutation queue",
+      "Implementing server-side rate limiting and loss-limit enforcement at the wrapper layer that cannot be bypassed by custom clients"
+    ],
+    "technologies": ["React", "TypeScript", "Node.js", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "dice"
+  },
+  {
+    "id": "9",
+    "src": "hiloThumbnail",
+    "alt": "HiLo",
+    "title": "Hi-Lo",
+    "description": "Multiplier-chaining card game — Next.js + React UI, NestJS wrapper API controlling the full deck, probability engine, and settlement",
+    "fullDescription": "Hi-Lo is a high-tension card-chaining game where correct higher/lower calls compound a multiplier with every guess, while a single wrong call forfeits the bet. The Next.js + React frontend delivers a polished UI with Canvas card-flip animations, backed by a NestJS + TypeScript + GraphQL backend. The system's centrepiece is its NestJS Wrapper API, which owns the full card session: deck generation, card delivery, real-time probability computation, skip validation, multiplier progression, and settlement. Cards are never pre-fetched by the client — each higher/lower decision triggers a GraphQL mutation to the wrapper, which evaluates the guess against the sealed deck state, returns the revealed card with an updated multiplier, and either advances the session or settles the round. The wrapper also exposes a probability query endpoint: after each reveal, the client can request the mathematically accurate higher/lower/equal probability for the next card, powered by a TypeScript card-counting engine that tracks the remaining deck.",
+    "overview": "Chain higher/lower calls to climb the multiplier — every card comes from the NestJS Wrapper API, which also owns live deck probability, skip logic, and atomic settlement so the client stays entirely display-focused.",
+    "features": [
+      "NestJS Wrapper API owning sealed deck state — cards are issued one at a time per mutation, never pre-delivered to the client",
+      "TypeScript card-probability engine at the wrapper layer computing real-time higher/lower/equal odds from remaining deck state",
+      "Canvas card-flip animations triggered strictly after the wrapper API confirms the revealed card and updated multiplier",
+      "Skip mutation handled by the wrapper with configurable per-round skip budget — enforced server-side, not client-side",
+      "Atomic cashout: wrapper executes multiplier payout, wallet credit, and round closure in a single database transaction"
+    ],
+    "challenges": [
+      "Building a TypeScript card-probability engine that remains accurate across arbitrary draw sequences without exposing remaining deck state to the client",
+      "Designing the NestJS wrapper's mutation flow to be idempotent — duplicate higher/lower calls under retry must not advance the deck or charge the bet twice",
+      "Preventing auto-play clients from reverse-engineering the deck order by cross-correlating wrapper probability responses over time"
+    ],
+    "technologies": ["Next.js", "React", "NestJS", "TypeScript", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "hilo"
+  },
+  {
+    "id": "10",
+    "src": "limboThumbnail",
+    "alt": "Limbo",
+    "title": "Limbo",
+    "description": "Target-multiplier game — Vite + React UI, Node.js wrapper API with provably fair instant outcomes and strategy auto-bet",
+    "fullDescription": "Limbo distils the crash concept to its mathematical core: set a target multiplier, submit your bet, and instantly learn whether the generated result met your target. The React + TypeScript frontend is bundled with Vite for a sub-second initial load, and the Canvas counter animation ratchets up to the result value with a physics-based easing curve that makes even instant outcomes feel visceral. The Node.js + GraphQL backend is organised around a Wrapper API service that is the exclusive owner of every wagering operation. The wrapper generates the round result server-side using a seeded PRNG, accepts the bet mutation from GraphQL, evaluates the outcome against the client's target, and returns a complete settlement payload including the raw seed for provably fair verification. Auto-bet is implemented as a TypeScript strategy engine — supporting martingale, D'Alembert, and flat-bet modes — whose per-round bet amount is validated and capped at the wrapper layer before submission.",
+    "overview": "Set a target, watch the number hit or miss in an instant — a Vite + React UI driven by a Node.js Wrapper API that generates seeded outcomes, evaluates bets, and settles wallets before the Canvas animation even begins.",
+    "features": [
+      "Node.js Wrapper API generating seeded PRNG outcomes server-side with round-start hash commitment for provably fair verification",
+      "Single-mutation bet flow: stake, target, outcome evaluation, and wallet settlement all resolved atomically at the wrapper layer",
+      "Canvas counter animation with physics-based easing designed to dramatise even sub-1ms instant outcomes",
+      "TypeScript auto-bet strategy engine (martingale, D'Alembert, flat) with per-round bet limits enforced server-side by the wrapper",
+      "GraphQL query for historical round seeds enabling full retroactive fairness auditing by any player"
+    ],
+    "challenges": [
+      "Designing the Canvas easing curve so the counter animation feels dramatically suspenseful whether the result is 1.01× or 1000×",
+      "Building a wrapper API PRNG that passes statistical uniformity tests across the full multiplier distribution (1×–∞)",
+      "Enforcing auto-bet strategy caps and session loss limits at the wrapper layer in a way that auto-play clients cannot circumvent"
+    ],
+    "technologies": ["React", "TypeScript", "Vite", "Node.js", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "limbo"
+  },
+  {
+    "id": "11",
+    "src": "slideThumbnail",
+    "alt": "Slide",
+    "title": "Slide",
+    "description": "Crash-variant slider game — Next.js + TypeScript frontend, NestJS wrapper API streaming multipliers and owning all settlement",
+    "fullDescription": "Slide is a crash-variant game with a distinctive sliding Canvas animation where a puck travels across the board as the multiplier grows, before halting at a server-determined endpoint. The Next.js + TypeScript frontend is backed by a NestJS + Node.js backend with a dual-interface architecture: a GraphQL subscription channel pushes the live multiplier stream to all connected clients simultaneously, while a REST mutation endpoint handles cashout — chosen for its lower serialisation overhead during high-concurrency bust events. The NestJS Wrapper API is the sole system authorised to generate halt points, process cashout requests, and execute round settlement. It receives raw multiplier ticks from the internal game engine, normalises them into typed events, and broadcasts them via GraphQL. When a player submits cashout, the wrapper validates the active session, locks the multiplier at the submitted value atomically, and settles the wallet — ensuring no race condition between the bust event and a late cashout request can result in an erroneous payout.",
+    "overview": "Ride the multiplier across the board — the NestJS Wrapper API streams normalised ticks via GraphQL, atomically processes cashout locks, and owns the full round lifecycle so no game client ever touches the halt-point logic.",
+    "features": [
+      "NestJS Wrapper API normalising raw engine multiplier ticks into typed GraphQL subscription events before client delivery",
+      "Atomic cashout lock at the wrapper layer — submitted cashout value is time-stamped and compared to halt point to prevent late-cashout exploits",
+      "Canvas slider animation interpolating between wrapper-delivered tick events for smooth, lag-compensated visual playback",
+      "Live concurrent player bet table with TypeScript-typed row models, state managed exclusively via wrapper API queries",
+      "REST cashout endpoint at the wrapper layer chosen over GraphQL for deterministic serialisation under burst concurrency"
+    ],
+    "challenges": [
+      "Designing the NestJS wrapper's cashout lock to be atomic and race-condition-free when thousands of players submit simultaneously at a popular multiplier",
+      "Interpolating Canvas slider animation between sparse wrapper API ticks so motion feels continuous without introducing client-side multiplier prediction",
+      "Abstracting the wrapper API's multiplier stream interface so the game client requires zero changes when the upstream engine protocol changes"
+    ],
+    "technologies": ["Next.js", "TypeScript", "NestJS", "Node.js", "GraphQL", "Canvas", "Wrapper API"],
+    "live": "#",
+    "gameId": "slide"
   }
 ]

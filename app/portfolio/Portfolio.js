@@ -1,24 +1,67 @@
 "use client";
-import Image from 'next/image';
-import { FaGithub, FaExternalLinkAlt, FaTimes } from 'react-icons/fa';
+import Image from "next/image";
+import { FaTimes, FaGamepad, FaExpand, FaCompress } from "react-icons/fa";
 import projectData from "../data/projectsData.json";
 import gallery from "@/utils/gallery";
-import { useScroll, useTransform, motion, useSpring, AnimatePresence } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { Draggable } from "gsap/Draggable";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  useSpring,
+  AnimatePresence,
+} from "framer-motion";
+import { useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 gsap.registerPlugin(ScrollTrigger);
-gsap.registerPlugin(Draggable);
 
 const Portfolio = () => {
   const containerRef = useRef(null);
   const titleRef = useRef(null);
   const projectsRef = useRef(null);
+  const curtainTopRef = useRef(null);
+  const curtainBottomRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [gameUrl, setGameUrl] = useState(null);
+  const [iframeFullscreen, setIframeFullscreen] = useState(false);
+  const [gameLoading, setGameLoading] = useState(false);
+
+  const launchGame = async (project) => {
+    setGameUrl({ url: null, title: project.title });
+    setGameLoading(true);
+    try {
+      const response = await fetch(
+        "https://root-stg-games-beapi.negroup-tech.net/negames/api/v2/launchUrl",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            gameId: project.gameId,
+            userId: "",
+            token: "92e060ec-2a34-4117-b8c1-2e02a8624bdb",
+            currency: "XXX",
+            playerToken: "",
+            demoGame: "true",
+          }),
+        }
+      );
+      const data = await response.json();
+      if (data?.play_url) {
+        setGameUrl({ url: data.play_url, title: project.title });
+      } else {
+        setGameUrl({ url: null, title: project.title, error: true });
+      }
+    } catch (err) {
+      console.error("Game launch failed:", err);
+      setGameUrl({ url: null, title: project.title, error: true });
+    } finally {
+      setGameLoading(false);
+    }
+  };
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -29,274 +72,106 @@ const Portfolio = () => {
     setSelectedProject(null);
   };
 
-  const handleTitleHover = (e) => {
-    const char = e.target;
-    if (!char.classList.contains('char')) return;
-
-    // Create flower petals
-    for (let i = 0; i < 12; i++) {
-      const petal = document.createElement('div');
-      petal.className = 'petal';
-      char.appendChild(petal);
-
-      gsap.set(petal, {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        width: '20px',
-        height: '20px',
-        background: `hsl(${Math.random() * 360}, 70%, 50%)`,
-        borderRadius: '50%',
-        x: '-50%',
-        y: '-50%',
-        scale: 0,
-        opacity: 0
-      });
-
-      gsap.to(petal, {
-        rotation: 360 * (i / 12),
-        x: `${Math.cos(i * 30) * 50}px`,
-        y: `${Math.sin(i * 30) * 50}px`,
-        scale: 1,
-        opacity: 1,
-        duration: 0.6,
-        ease: "back.out(1.7)"
-      });
-    }
-
-    gsap.to(char, {
-      color: `hsl(${Math.random() * 360}, 70%, 50%)`,
-      scale: 1.5,
-      rotation: "random(-30, 30)",
-      y: -20,
-      duration: 0.4,
-      ease: "back.out(1.7)"
-    });
-  };
-
-  const handleTitleLeave = (e) => {
-    const char = e.target;
-    if (!char.classList.contains('char')) return;
-
-    const petals = char.querySelectorAll('.petal');
-    
-    gsap.to(petals, {
-      scale: 0,
-      opacity: 0,
-      duration: 0.3,
-      stagger: 0.02,
-      onComplete: () => {
-        petals.forEach(petal => petal.remove());
-      }
-    });
-
-    gsap.to(char, {
-      color: "#333",
-      scale: 1,
-      rotation: 0,
-      y: 0,
-      duration: 0.5,
-      ease: "power2.out"
-    });
-  };
-
   useGSAP(() => {
+    // Split title into individually-clipped letter spans
     const text = "Portfolio";
-    const chars = text.split('');
-    titleRef.current.innerHTML = chars
-      .map((char, i) => `
-        <span class="char-container" style="display: inline-block; position: relative;">
-          <span class="thread" style="transform-origin: top;"></span>
-          <span class="char" style="display: inline-block; position: relative;" data-char="${char}">${char}</span>
-        </span>
-      `).join('');
-  
-    const titleChars = titleRef.current.querySelectorAll('.char');
-    const threads = titleRef.current.querySelectorAll('.thread');
-    const charContainers = titleRef.current.querySelectorAll('.char-container');
-  
-    // Store original positions
-    const originalPositions = [];
-    
-    // Set initial positions and make letters draggable
-    titleChars.forEach((char, i) => {
-      const directions = [
-        { x: -300, y: -200 },  // top-left
-        { x: 0, y: -300 },     // top
-        { x: 300, y: -200 },   // top-right
-        { x: -400, y: 0 },     // left
-        { x: 400, y: 0 },      // right
-        { x: -300, y: 200 },   // bottom-left
-        { x: 0, y: 300 },      // bottom
-        { x: 300, y: 200 },    // bottom-right
-      ];
-      
-      gsap.set(char, {
-        opacity: 0,
-        x: directions[i % directions.length].x,
-        y: directions[i % directions.length].y,
-        rotation: gsap.utils.random(-360, 360)
-      });
-  
-      // Store original position
-      originalPositions[i] = { x: 0, y: 0 };
-  
-      // Make letters draggable
-      Draggable.create(char, {
-        type: "x,y",
-        bounds: ".portfolio__title",
-        edgeResistance: 0.65,
-        onDragStart: function() {
-          gsap.to(char, {
-            scale: 1.2,
-            zIndex: 10,
-            duration: 0.2
-          });
-        },
-        onDrag: function() {
-          const charBounds = char.getBoundingClientRect();
-          const containerBounds = charContainers[i].getBoundingClientRect();
-          
-          // Calculate thread length based on drag position
-          const threadLength = Math.sqrt(
-            Math.pow(charBounds.left - containerBounds.left, 2) +
-            Math.pow(charBounds.top - containerBounds.top, 2)
-          );
-          
-          // Calculate correct angle using atan2
-          const threadAngle = Math.atan2(
-            charBounds.top - containerBounds.top,
-            charBounds.left - containerBounds.left
-          ) * (180 / Math.PI);
-          
-          gsap.to(threads[i], {
-            height: threadLength,
-            rotation: threadAngle,
-            duration: 0.1
-          });
-        },
-        onDragEnd: function() {
-          gsap.to(char, {
-            x: originalPositions[i].x,
-            y: originalPositions[i].y,
-            scale: 1,
-            zIndex: 1,
-            duration: 0.5,
-            ease: "elastic.out(1, 0.3)",
-            onComplete: () => {
-              gsap.to(threads[i], {
-                height: 100,
-                rotation: 0,
-                duration: 0.3
-              });
-            }
-          });
-        }
-      });
-    });
+    titleRef.current.innerHTML = text
+      .split("")
+      .map(char => `<span class="char-wrap"><span class="char">${char}</span></span>`)
+      .join("");
 
-    // Hide threads initially
-    gsap.set(threads, {
-      opacity: 0,
-      height: 0
-    });
-  
-    // Create animation timeline with faster animations
-    const tl = gsap.timeline();
-  
-    // First animate the characters to their positions
-    tl.to(titleChars, {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      rotation: 0,
-      duration: 0.8, // Reduced from 1.5
-      stagger: 0.05, // Reduced from 0.1
-      ease: "power2.out" // Changed from power4.out
-    })
-    // Then drop the threads
-    .to(threads, {
-      opacity: 1,
-      height: 100,
-      duration: 0.4, // Reduced from 0.8
-      stagger: 0.02, // Reduced from 0.05
-      ease: "power1.inOut" // Changed from power2.inOut
-    })
-    // Add floating animation after everything is in place
-    .add(() => {
-      gsap.to(titleChars, {
-        y: "random(-10, 10)",
-        rotation: "random(-15, 15)",
-        duration: "random(1, 2)", // Reduced from 2-4
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut"
-      });
-      
-      gsap.to(threads, {
-        scaleY: "random(0.8, 1.2)",
-        duration: "random(0.5, 1)", // Reduced from 1-2
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        stagger: {
-          amount: 0.5, // Reduced from 1
-          from: "random"
-        }
-      });
-    });
+    const chars = titleRef.current.querySelectorAll(".char");
+
+    const tl = gsap.timeline({ defaults: { ease: "expo.inOut" } });
+
+    // ── Curtain panels split open ──────────────────────────────────────
+    tl.to(curtainTopRef.current, { y: "-100%", duration: 1.15 }, 0)
+      .to(curtainBottomRef.current, { y: "100%", duration: 1.15 }, 0)
+
+      // ── Eyebrow label ─────────────────────────────────────────────────
+      .from(".portfolio__hero-eyebrow", {
+        opacity: 0,
+        y: 18,
+        duration: 0.7,
+        ease: "power3.out",
+      }, 0.52)
+
+      // ── Title letters clip-reveal from bottom ──────────────────────────
+      .from(chars, {
+        yPercent: 115,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.055,
+        ease: "power4.out",
+      }, 0.62)
+
+      // ── Decorative rule draws across ──────────────────────────────────
+      .from(".portfolio__hero-line", {
+        scaleX: 0,
+        transformOrigin: "left center",
+        duration: 0.9,
+        ease: "power3.out",
+      }, 0.88)
+
+      // ── Tagline fades up ──────────────────────────────────────────────
+      .from(".portfolio__hero-tagline", {
+        opacity: 0,
+        y: 14,
+        duration: 0.7,
+        ease: "power3.out",
+      }, 1.0);
   }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
+    offset: ["start start", "end end"],
   });
 
   const y = useSpring(useTransform(scrollYProgress, [0, 1], [0, 300]), {
     stiffness: 100,
-    damping: 30
+    damping: 30,
   });
 
   const container = {
-    hidden: { opacity: 0 },
+    hidden: {},
     show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
+      transition: { staggerChildren: 0.08, delayChildren: 0.1 },
+    },
   };
 
   const projectVariant = {
-    hidden: { 
-      opacity: 0, 
-      x: -100,
+    hidden: { opacity: 0, y: 44, scale: 0.94 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
-    show: { 
-      opacity: 1, 
-      x: 0,
-      transition: {
-        type: "spring",
-        damping: 20,
-        stiffness: 100
-      }
-    }
   };
 
   return (
     <section className="portfolio" ref={containerRef}>
+      {/* ── Cinematic curtain panels ── */}
+      <div className="portfolio__curtain portfolio__curtain--top" ref={curtainTopRef} />
+      <div className="portfolio__curtain portfolio__curtain--bottom" ref={curtainBottomRef} />
+
+      {/* ── Floating theme toggle ── */}
+      <div className="portfolio__theme-toggle">
+        <ThemeToggle />
+      </div>
+
       <motion.div className="portfolio__parallax-bg" style={{ y }} />
       <div className="portfolio__container">
-        <h2 
-          ref={titleRef}
-          className="portfolio__title"
-          onMouseEnter={handleTitleHover}
-          onMouseLeave={handleTitleLeave}
-        >
-          Featured Projects
-        </h2>
-        
-        <motion.div 
+        <div className="portfolio__hero">
+          <span className="portfolio__hero-eyebrow">Selected Work &nbsp;·&nbsp; 2024–2025</span>
+          <h2 ref={titleRef} className="portfolio__title">Portfolio</h2>
+          <div className="portfolio__hero-line" />
+          <p className="portfolio__hero-tagline">
+            11 production games &mdash; real-time Canvas engines, GraphQL APIs, wrapper-layer architecture
+          </p>
+        </div>
+
+        <motion.div
           ref={projectsRef}
           className="portfolio__projects"
           variants={container}
@@ -305,7 +180,7 @@ const Portfolio = () => {
           viewport={{ once: true, margin: "-100px" }}
         >
           {projectData.map((project, index) => (
-            <motion.div 
+            <motion.div
               key={project.id}
               className="portfolio__project"
               variants={projectVariant}
@@ -317,22 +192,39 @@ const Portfolio = () => {
               }}
             >
               <div className="portfolio__project-image">
-                <Image 
-                  src={gallery.banners[project.src]} 
+                <Image
+                  src={gallery.thumbnails[project.src]}
                   alt={project.title}
                   width={600}
                   height={400}
                   layout="responsive"
                 />
-                <div className="portfolio__project-preview">
-                  <div className="portfolio__project-tech">
-                    {project.technologies?.map((tech, i) => (
-                      <span key={i}>{tech}</span>
-                    ))}
+                <div className="portfolio__project-overlay">
+                  <div className="portfolio__project-overlay-scanlines" />
+                  <div className="portfolio__project-overlay-glow" />
+                  <div className="portfolio__project-overlay-content">
+                    <div className="portfolio__project-tech">
+                      {project.technologies?.map((tech, i) => (
+                        <span key={i}>{tech}</span>
+                      ))}
+                    </div>
+                    <div className="portfolio__project-actions">
+                      <button className="portfolio__project-button">
+                        View Details
+                      </button>
+                      <a
+                        href="#"
+                        className="portfolio__project-launch"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          launchGame(project);
+                        }}
+                      >
+                        <FaGamepad /> Launch Game
+                      </a>
+                    </div>
                   </div>
-                  <button className="portfolio__project-button">
-                    View Details
-                  </button>
                 </div>
               </div>
               <div className="portfolio__project-content">
@@ -343,76 +235,158 @@ const Portfolio = () => {
           ))}
         </motion.div>
       </div>
-  
+
       <AnimatePresence>
         {selectedProject && (
-          <motion.div 
+          <motion.div
             className="portfolio__modal"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setSelectedProject(null)}
           >
-            <motion.div className="portfolio__modal-content">
-              <button 
-                className="portfolio__modal-close"
-                onClick={() => setSelectedProject(null)}
-              >
-                <FaTimes />
-              </button>
-              
-              <div className="portfolio__modal-image-container">
-                <div className="portfolio__modal-image">
-                  <Image 
-                    src={gallery.banners[selectedProject.src]} 
+            <motion.div
+              className="portfolio__modal-content"
+              initial={{ opacity: 0, y: 40, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 40, scale: 0.97 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Left — visual panel */}
+              <div className="portfolio__modal-left">
+                <div className="portfolio__modal-img-wrap">
+                  <Image
+                    src={gallery.thumbnails[selectedProject.src]}
                     alt={selectedProject.title}
-                    width={400}  // reduced from 600
-                    height={225}  // reduced from 338 to maintain aspect ratio
-                    layout="responsive"
+                    width={500}
+                    height={500}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />
+                  <div className="portfolio__modal-img-overlay" />
+                </div>
+                <div className="portfolio__modal-left-meta">
+                  <p className="portfolio__modal-overview">{selectedProject.overview}</p>
+                  <button
+                    className="portfolio__modal-launch"
+                    onClick={() => launchGame(selectedProject)}
+                  >
+                    <FaGamepad /> Play Demo
+                  </button>
                 </div>
               </div>
-  
-              <div className="portfolio__modal-details">
-                <h2>{selectedProject.title}</h2>
+
+              {/* Right — details panel */}
+              <div className="portfolio__modal-right">
+                <button
+                  className="portfolio__modal-close"
+                  onClick={() => setSelectedProject(null)}
+                >
+                  <FaTimes />
+                </button>
+
+                <div className="portfolio__modal-header">
+                  <span className="portfolio__modal-label">Game</span>
+                  <h2>{selectedProject.title}</h2>
+                </div>
+
                 <div className="portfolio__modal-tech">
                   {selectedProject.technologies?.map((tech, i) => (
                     <span key={i}>{tech}</span>
                   ))}
                 </div>
-                
-                <p className="overview">{selectedProject.overview}</p>
-  
-                <div className="portfolio__modal-section">
-                  <h3>Description</h3>
-                  <p>{selectedProject.fullDescription}</p>
+
+                <div className="portfolio__modal-scrollable">
+                  <div className="portfolio__modal-section">
+                    <h4>About</h4>
+                    <p>{selectedProject.fullDescription}</p>
+                  </div>
+
+                  <div className="portfolio__modal-section">
+                    <h4>Key Features</h4>
+                    <ul>
+                      {selectedProject.features?.map((f, i) => (
+                        <li key={i}>{f}</li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="portfolio__modal-section">
+                    <h4>Challenges</h4>
+                    <ul>
+                      {selectedProject.challenges?.map((c, i) => (
+                        <li key={i}>{c}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-  
-                <div className="portfolio__modal-section">
-                  <h3>Key Features</h3>
-                  <ul>
-                    {selectedProject.features?.map((feature, i) => (
-                      <li key={i}>{feature}</li>
-                    ))}
-                  </ul>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ── Iframe Game Demo Modal ── */}
+      <AnimatePresence>
+        {gameUrl && (
+          <motion.div
+            className={`portfolio__game-modal${iframeFullscreen ? ' portfolio__game-modal--fs' : ''}`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
+            <motion.div
+              className="portfolio__game-modal-inner"
+              initial={{ scale: 0.94, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.94, y: 30 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="portfolio__game-modal-bar">
+                <span className="portfolio__game-modal-title">
+                  <FaGamepad /> {gameUrl.title} — Demo
+                </span>
+                <div className="portfolio__game-modal-controls">
+                  <button
+                    className="portfolio__game-modal-btn"
+                    onClick={() => setIframeFullscreen(f => !f)}
+                    title={iframeFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+                  >
+                    {iframeFullscreen ? <FaCompress /> : <FaExpand />}
+                  </button>
+                  <button
+                    className="portfolio__game-modal-btn portfolio__game-modal-btn--close"
+                    onClick={() => { setGameUrl(null); setIframeFullscreen(false); }}
+                    title="Close"
+                  >
+                    <FaTimes />
+                  </button>
                 </div>
-  
-                <div className="portfolio__modal-section">
-                  <h3>Technical Challenges</h3>
-                  <ul>
-                    {selectedProject.challenges?.map((challenge, i) => (
-                      <li key={i}>{challenge}</li>
-                    ))}
-                  </ul>
-                </div>
-  
-                <div className="portfolio__modal-links">
-                  <a href={selectedProject.github} target="_blank" rel="noopener noreferrer">
-                    <FaGithub /> View Code
-                  </a>
-                  <a href={selectedProject.live} target="_blank" rel="noopener noreferrer">
-                    <FaExternalLinkAlt /> Live Demo
-                  </a>
-                </div>
+              </div>
+              <div className="portfolio__game-modal-frame">
+                {gameLoading && (
+                  <div className="portfolio__game-modal-placeholder">
+                    <div className="portfolio__game-modal-spinner" />
+                    <span>Loading {gameUrl?.title}...</span>
+                  </div>
+                )}
+                {!gameLoading && gameUrl?.url && (
+                  <iframe
+                    src={gameUrl.url}
+                    title={gameUrl.title}
+                    allow="fullscreen; autoplay"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups"
+                  />
+                )}
+                {!gameLoading && !gameUrl?.url && (
+                  <div className="portfolio__game-modal-placeholder">
+                    <FaGamepad />
+                    <p>{gameUrl?.title}</p>
+                    <span>{gameUrl?.error ? 'Failed to load — please try again' : 'Live demo coming soon'}</span>
+                  </div>
+                )}
               </div>
             </motion.div>
           </motion.div>
@@ -420,107 +394,26 @@ const Portfolio = () => {
       </AnimatePresence>
     </section>
   );
-}
-// Remove the semicolon here
+};
 
 export default Portfolio;
 
-
-// Add these title hover handlers
-const handleTitleHover = () => {
-const chars = titleRef.current.querySelectorAll('.char');
-gsap.to(chars, {
-scale: "random(1.2, 2)",
-rotation: "random(-20, 20)",
-y: "random(-20, 20)",
-color: () => `hsl(${Math.random() * 360}, 70%, 50%)`,
-duration: 0.5,
-stagger: {
-amount: 0.3,
-from: "random"
-},
-ease: "power2.out"
-});
-};
-
-const handleTitleLeave = () => {
-const chars = titleRef.current.querySelectorAll('.char');
-gsap.to(chars, {
-scale: 1,
-rotation: 0,
-y: 0,
-color: "#333",
-duration: 0.5,
-stagger: {
-amount: 0.3,
-from: "random"
-},
-ease: "power2.out"
-});
-};
-
-// Add these handlers inside the component
 const handleProjectHover = (e) => {
-const project = e.currentTarget;
-const image = project.querySelector('img');
-const techSpans = project.querySelectorAll('.portfolio__project-tech span');
-const button = project.querySelector('.portfolio__project-button');
-const content = project.querySelector('.portfolio__project-content');
+  const project = e.currentTarget;
 
-gsap.to(project, {
-scale: 1.05,
-rotationY: 15,
-boxShadow: "0 30px 50px rgba(0,0,0,0.2)",
-duration: 0.5,
-ease: "power3.out"
-});
-
-gsap.to(image, {
-scale: 1.2,
-duration: 0.5,
-ease: "power2.out"
-});
-
-gsap.to(content, {
-y: -10,
-duration: 0.4,
-ease: "power2.out"
-});
-
-gsap.to(techSpans, {
-scale: 1.1,
-y: -5,
-backgroundColor: "#007bff",
-color: "#fff",
-stagger: 0.05,
-duration: 0.3,
-ease: "back.out(2)"
-});
-
-gsap.to(button, {
-scale: 1.2,
-y: -8,
-backgroundColor: "#0056b3",
-duration: 0.3,
-ease: "back.out(2)"
-});
+  gsap.to(project, {
+    boxShadow: "0 24px 48px rgba(0,0,0,0.22)",
+    duration: 0.35,
+    ease: "power3.out",
+  });
 };
 
 const handleProjectLeave = (e) => {
-const project = e.currentTarget;
-const image = project.querySelector('img');
-const techSpans = project.querySelectorAll('.portfolio__project-tech span');
-const button = project.querySelector('.portfolio__project-button');
-const content = project.querySelector('.portfolio__project-content');
+  const project = e.currentTarget;
 
-gsap.to([project, image, techSpans, button, content], {
-scale: 1,
-rotationY: 0,
-y: 0,
-backgroundColor: "",
-color: "",
-boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
-duration: 0.5,
-ease: "power3.inOut"
-});
+  gsap.to(project, {
+    boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
+    duration: 0.4,
+    ease: "power3.inOut",
+  });
 };

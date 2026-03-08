@@ -29,6 +29,23 @@ import igsprite from "@/public/assests/spriteIcons/instagramsp.png";
 import twsprite from "@/public/assests/spriteIcons/twittersp.png";
 import lnsprite from "@/public/assests/spriteIcons/linkedinsp.png";
 //spriteIcons
+
+//Thumbnails
+import diamondsThumbnail from "@/public/assests/thumbnails/Diamonds.jpg";
+import diceThumbnail from "@/public/assests/thumbnails/Dice.jpg";
+import hiloThumbnail from "@/public/assests/thumbnails/Hilo.jpg";
+import howzzatThumbnail from "@/public/assests/thumbnails/Howzzat Thumb 230x300.jpg";
+import limboThumbnail from "@/public/assests/thumbnails/Limbo.jpg";
+import minesThumbnail from "@/public/assests/thumbnails/Mines.jpg";
+import plinkoThumbnail from "@/public/assests/thumbnails/Plinko.jpg";
+import rocketBoomThumbnail from "@/public/assests/thumbnails/RocketBoom.jpg";
+import slideThumbnail from "@/public/assests/thumbnails/Slide.jpg";
+import spinWheelThumbnail from "@/public/assests/thumbnails/Spin the wheel.jpg";
+import vleagueThumbnail from "@/public/assests/thumbnails/V-League-thumbnail_230x300.jpg";
+import vpsThumbnail from "@/public/assests/thumbnails/VPS.jpg";
+import defenderThumbnail from "@/public/assests/thumbnails/defender-soccer-thumbnail__230x300.jpg";
+//Thumbnails
+
 export default {
   logos: {
     twitterLogo,
@@ -60,5 +77,21 @@ export default {
     igsprite,
     twsprite,
     lnsprite,
+  },
+
+  thumbnails: {
+    diamondsThumbnail,
+    diceThumbnail,
+    hiloThumbnail,
+    howzzatThumbnail,
+    limboThumbnail,
+    minesThumbnail,
+    plinkoThumbnail,
+    rocketBoomThumbnail,
+    slideThumbnail,
+    spinWheelThumbnail,
+    vleagueThumbnail,
+    vpsThumbnail,
+    defenderThumbnail,
   },
 };

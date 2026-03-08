@@ -1,10 +1,86 @@
+/* ── Theme Variables ──────────────────────────────────────────── */
+:root {
+  --bg:              #080808;
+  --bg-secondary:    #111111;
+  --text-primary:    #f0f0f0;
+  --text-secondary:  rgba(255,255,255,0.65);
+  --text-muted:      rgba(255,255,255,0.28);
+  --border-color:    rgba(255,255,255,0.08);
+  --card-bg:         #1a1a1a;
+  --modal-bg:        #0e0e0e;
+  --modal-border:    rgba(255,255,255,0.07);
+  /* Footer stays light on all pages by default — only portfolio overrides this */
+  --footer-bg:       #f5f5f5;
+  --footer-text:     #757575;
+  --header-bg:       #000000;
+}
+
+[data-theme="light"] {
+  --bg:              #f4f4f4;
+  --bg-secondary:    #e8e8e8;
+  --text-primary:    #111111;
+  --text-secondary:  #555555;
+  --text-muted:      #888888;
+  --border-color:    rgba(0,0,0,0.1);
+  --card-bg:         #ffffff;
+  --modal-bg:        #ffffff;
+  --modal-border:    rgba(0,0,0,0.08);
+  --footer-bg:       #f0f0f0;
+  --footer-text:     #666666;
+  --header-bg:       #000000;
+}
+/* ────────────────────────────────────────────────────────────── */
+
 *{
   box-sizing: border-box;
   margin: 0;
 }
 
+html {
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+body {
+  background-color: #ffffff;
+  color: var(--text-primary);
+  transition: color 0.35s ease;
+}
+
+/* Home, contact, about pages are always light — white-bg images blend naturally.
+   The .portfolio section controls its own dark/light bg via var(--bg). */
+
+/* ── Portfolio page: body bg matches portfolio theme to seal any gaps ── */
+body:has(.portfolio) {
+  background-color: var(--bg);
+}
+
+/* Footer follows theme only on the portfolio page */
+body:has(.portfolio) .footer_head {
+  background-color: var(--bg);
+}
+body:has(.portfolio) .footer_head .backToTop .arrow {
+  background-color: var(--bg) !important;
+  box-shadow: none;
+}
+body:has(.portfolio) .footer_head .footer_wrapper {
+  background-color: transparent;
+}
+/* Dark mode footer text on portfolio */
+[data-theme="dark"] body:has(.portfolio) .footer_head .port_span,
+[data-theme="dark"] body:has(.portfolio) .footer_head .navLink {
+  color: rgba(255,255,255,0.45);
+}
+[data-theme="dark"] body:has(.portfolio) .footer_head .navLink:hover {
+  color: rgba(255,255,255,0.9);
+}
+
 .wrapper {
   animation: slideDown 0.8s ease-out;
+}
+
+/* Portfolio page: strip .children padding so section is edge-to-edge */
+.children:has(.portfolio) {
+  padding: 0 !important;
 }
 
 @keyframes slideDown {

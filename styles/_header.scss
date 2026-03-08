@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  background-color: black;
+  background-color: var(--header-bg);
   position: fixed;
   z-index: 100;
   top: -90px;
@@ -58,7 +58,7 @@
     letter-spacing: 0.1rem;
     font-family: "proxima nova light", "Helvetica Neue", Helvetica, Arial,
       Sans-serif;
-    background-color: black;
+    background-color: var(--header-bg);
 
     @media (max-width: 770px) {
       height: auto;
@@ -68,7 +68,7 @@
       left: 0;
       width: 100%;
       flex-direction: column;
-      background-color: black;
+      background-color: var(--header-bg);
       display: none;
       padding: 20px 0;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
