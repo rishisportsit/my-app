@@ -1,4 +1,5 @@
 "use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import constants from "../../constants/constants.json";
 import gallery from "@/utils/gallery";
@@ -59,6 +60,110 @@ const About = () => {
 
   const levels = ["Jedi", "Ninja", "Geek", "Newbie"];
 
+  const experienceGroups = [
+    {
+      company: "NE Group",
+      logo: "/logo-dark.svg",
+      totalDuration: "2 yrs 7 mos",
+      roles: [
+        {
+          title: "Freelancer",
+          type: "Part-time",
+          startDate: "Feb 2026",
+          endDate: "Present",
+          duration: "2 mos", 
+          location: "Paris, Île-de-France, France · On-site",
+          skills: [
+            "Python", "MLflow", "DAGs", "Airflow", "Docker", "Jupyter Notebooks", "Streamlit",
+            "AIML", "Data Science", "Data Analysis", "Machine Learning", 
+            "MongoDB", "MySQL", "Next.js", "Git", "Artificial Intelligence (AI)", 
+            "Analytical Skills", "Python (Programming Language)", "REST APIs", 
+            "React.js", "Redux.js", "Node.js", "Project Management", 
+            "Swagger API", "Zustand", "Tailwind CSS"
+          ],
+        },
+        {
+          title: "Frontend Developer",
+          type: "Full-time",
+          startDate: "Jan 2024",
+          endDate: "Feb 2026",
+          duration: "2 yrs 2 mos",
+          location: "Hyderabad, Telangana, India · Remote",
+          skills: [
+            "AIML", "Data Science", "Data Analysis", "Machine Learning", 
+            "MongoDB", "MySQL", "Next.js", "Git", "Artificial Intelligence (AI)", 
+            "Analytical Skills", "Python (Programming Language)", "REST APIs", 
+            "React.js", "Redux.js", "Node.js", "Project Management", 
+            "Swagger API", "Zustand", "Tailwind CSS"
+          ],
+        },
+        {
+          title: "Frontend Developer intern",
+          type: "Apprenticeship",
+          startDate: "Sep 2023",
+          endDate: "Jan 2024",
+          duration: "5 mos",
+          location: "Hyderabad, Telangana, India · Remote",
+          skills: ["HTML5", "JavaScript"],
+        }
+      ]
+    }
+  ];
+
+  const educations = [
+    {
+      school: "EPITA: Ecole d'Ingénieurs en Informatique",
+      degree: "Master of Science - MS, Data Science",
+      startDate: "Sep 2025",
+      endDate: "Present",
+      location: "Paris, France",
+      logo: "/1631350838145.jpeg"
+    },
+    {
+      school: "Marri Laxman Reddy Institute of Technology and Management",
+      degree: "Bachelor of Technology, Data Science",
+      startDate: "2020",
+      endDate: "2024",
+      location: "Hyderabad, Telangana, India"
+    }
+  ];
+
+  const certifications = [
+    {
+      name: "SQL Hacker rank",
+      issuer: "HackerRank",
+      issued: "Aug 2023",
+      url: "https://www.hackerrank.com/certificates/iframe/28872c5c8fb8",
+      credentialId: "28872c5c8fb8"
+    }
+  ];
+
+  // State to track expanded skills for each experience item (using a composite key `groupIndex-roleIndex`)
+  const [expandedSkills, setExpandedSkills] = useState({});
+
+  const toggleSkills = (groupIndex, roleIndex) => {
+    const key = `${groupIndex}-${roleIndex}`;
+    
+    setExpandedSkills((prev) => {
+      const isExpanded = !!prev[key];
+      
+      if (!isExpanded) {
+        // If we are expanding, set a timeout to collapse after 10 seconds
+        setTimeout(() => {
+          setExpandedSkills((current) => ({
+            ...current,
+            [key]: false
+          }));
+        }, 10000); // 10 seconds
+      }
+      
+      return {
+        ...prev,
+        [key]: !isExpanded,
+      };
+    });
+  };
+
   const fadeInUpAnimation = {
     initial: { opacity: 0, y: 50 },
     whileInView: { opacity: 1, y: 0 },
@@ -116,6 +221,121 @@ const About = () => {
             <Image src={meBanner}  className="img" alt="Adam" />
             {/* <Image src={renderAdam} className="img" alt="Adam" /> */}
           </motion.div>
+        </div>
+      </motion.div>
+      <motion.div className="storyExperience" {...fadeInUpAnimation}>
+        <div className="experience-container">
+          <h2 className="section-title">Experience</h2>
+          
+          {experienceGroups.map((group, gIndex) => (
+            <div className="company-group" key={gIndex}>
+              <div className="company-header">
+                <div className="logo-container">
+                   <Image src={group.logo} alt={group.company} width={48} height={48} style={{objectFit: "contain"}} />
+                </div>
+                <div className="company-info">
+                  <h3 className="company-name">{group.company}</h3>
+                  <span className="total-duration">{group.totalDuration}</span>
+                </div>
+              </div>
+
+              <div className="roles-timeline">
+                {group.roles.map((role, rIndex) => {
+                  const expandKey = `${gIndex}-${rIndex}`;
+                  const isExpanded = expandedSkills[expandKey];
+                  const visibleSkills = isExpanded ? role.skills : role.skills.slice(0, 8);
+                  const hiddenCount = role.skills.length - visibleSkills.length;
+
+                  return (
+                    <div className="role-item" key={rIndex}>
+                      <div className="timeline-marker"></div>
+                      <div className="role-content">
+                        <h3 className="role-title">{role.title}</h3>
+                        <div className="role-meta">
+                          <span className="role-type">{role.type}</span>
+                          <span className="role-date">{role.startDate} - {role.endDate} · {role.duration}</span>
+                          <span className="role-location">{role.location}</span>
+                        </div>
+                        
+                        <div className="skills-list">
+                          <strong>Skills:</strong>{" "}
+                          <span className="skills-text">
+                              {visibleSkills.join(" · ")}
+                          </span>
+                          {hiddenCount > 0 && !isExpanded && (
+                              <button onClick={() => toggleSkills(gIndex, rIndex)} className="show-more-skills">
+                                  +{hiddenCount} more
+                              </button>
+                          )}
+                          {isExpanded && (
+                               <button onClick={() => toggleSkills(gIndex, rIndex)} className="show-more-skills">
+                                  show less
+                              </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="education-container">
+          <h2 className="section-title">Education</h2>
+          {educations.map((edu, index) => (
+            <div className="timeline-item" key={index}>
+              <div className="logo-container">
+                {edu.logo ? (
+                  <Image
+                    src={edu.logo}
+                    alt={edu.school}
+                    width={50}
+                    height={50}
+                    style={{ objectFit: "contain" }}
+                  />
+                ) : (
+                  <span className="placeholder-logo">{edu.school.charAt(0)}</span>
+                )}
+              </div>
+              <div className="content-container">
+                <h3 className="role">{edu.school}</h3>
+                <h4 className="company">{edu.degree}</h4>
+                <div className="meta-info">
+                  <span>{edu.startDate} - {edu.endDate}</span>
+                  {edu.location && <span>{edu.location}</span>}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="education-container">
+          <h2 className="section-title">Licenses & certifications</h2>
+          {certifications.map((cert, index) => (
+            <div className="timeline-item" key={index}>
+              <div className="logo-container">
+                <span className="placeholder-logo">{cert.issuer.charAt(0)}</span>
+              </div>
+              <div className="content-container">
+                <h3 className="role">{cert.name}</h3>
+                <h4 className="company">{cert.issuer}</h4>
+                <div className="meta-info">
+                  <span>Issued {cert.issued}</span>
+                </div>
+                {cert.url && (
+                  <a
+                    href={cert.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="credential-link"
+                  >
+                    Show credential
+                  </a>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
       </motion.div>
       <motion.div className="story2" {...fadeInUpAnimation}>

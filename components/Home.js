@@ -154,18 +154,19 @@ function Home() {
   }, []);
 
   const launchGame = async (project) => {
+    setSelectedProject(null); // Close the details modal to show the game modal underneath
     setGameUrl({ url: null, title: project.title });
     setGameLoading(true);
     try {
       const response = await fetch(
-        "https://root-stg-games-beapi.negroup-tech.net/negames/api/v2/launchUrl",
+        process.env.NEXT_PUBLIC_GAME_API_URL,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             gameId: project.gameId,
             userId: "",
-            token: "92e060ec-2a34-4117-b8c1-2e02a8624bdb",
+            token: process.env.NEXT_PUBLIC_GAME_TOKEN,
             currency: "XXX",
             playerToken: "",
             demoGame: "true",
@@ -360,8 +361,8 @@ function Home() {
         </motion.div>
       </div>
 
-      {/* Portfolio Modals - wrapped in .portfolio for styles */}
-      <div className="portfolio" style={{ minHeight: 0, background: 'transparent' }}>
+      {/* Portfolio Modals - wrapped in .portfolio-modals for styles */}
+      <div className="portfolio-modals" style={{ minHeight: 0, background: 'transparent' }}>
         <AnimatePresence>
           {selectedProject && (
             <motion.div

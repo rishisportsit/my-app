@@ -3,6 +3,16 @@
 .body_wrapper {
   height: 100%;
   width: 100%;
+  /* Force light theme variables for Home Page regardless of global data-theme */
+  --bg: #ffffff;
+  --bg-secondary: #e8e8e8;
+  --text-primary: #111111;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+  --border-color: rgba(0,0,0,0.1);
+  --card-bg: #ffffff;
+  --modal-bg: #ffffff;
+  --modal-border: rgba(0,0,0,0.08);
 }
 
 .bannermain_wrapper {
