@@ -2,7 +2,14 @@
   {
     "id": "betting-1",
     "src": "ossinoThumbnail",
-    "gallery": ["ossinoThumbnail", "ossino2", "ossino3", "ossino4", "ossino5", "ossino6"],
+    "gallery": [
+      "ossinoThumbnail",
+      "ossino2",
+      "ossino3",
+      "ossino4",
+      "ossino5",
+      "ossino6"
+    ],
     "alt": "Ossino Sportsbook & Casino",
     "title": "Ossino Sportsbook & Casino",
     "description": "Comprehensive platform featuring both a real-time sportsbook with a focus on soccer and an immersive online casino.",

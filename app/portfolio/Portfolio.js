@@ -338,12 +338,12 @@ const Portfolio = () => {
                 <h3 style={{ fontSize: "clamp(1.2rem, 3vw, 1.8rem)", marginBottom: "0.8rem", color: "#fff", fontFamily: "sans-serif" }}>{project.title}</h3>
                 <p style={{ fontSize: "clamp(0.85rem, 2vw, 1rem)", lineHeight: "1.6", color: "#bbb", marginBottom: "1rem", fontFamily: "sans-serif" }}>{project.description}</p>
                  {project.layout === "mobile" && (
-                    <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: "10px", color: "#fca311", fontSize: "0.9rem" }}>
+                    <div style={{ marginTop: "auto", display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "20px", padding: "4px 12px", alignSelf: "flex-start", color: "#ccc", fontSize: "0.82rem", letterSpacing: "0.03em" }}>
                       <span>📱 Mobile Optimized</span>
                     </div>
                  )}
                  {project.layout === "desktop" && (
-                    <div style={{ marginTop: "auto", display: "flex", alignItems: "center", gap: "10px", color: "#fca311", fontSize: "0.9rem" }}>
+                    <div style={{ marginTop: "auto", display: "inline-flex", alignItems: "center", gap: "6px", background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)", borderRadius: "20px", padding: "4px 12px", alignSelf: "flex-start", color: "#ccc", fontSize: "0.82rem", letterSpacing: "0.03em" }}>
                       <span>🖥️ Desktop Platform</span>
                     </div>
                  )}

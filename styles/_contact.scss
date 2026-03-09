@@ -61,8 +61,8 @@
 
       .contact {
         .contact_title {
-          font-family: "proxima nova bold", "Helvetica Neue", Helvetica, Arial,
-            Sans-serif;
+          font-family:
+            "proxima nova bold", "Helvetica Neue", Helvetica, Arial, Sans-serif;
           font-size: 6rem;
           color: #333;
           text-rendering: optimizelegibility;
@@ -173,29 +173,29 @@
       }
       .designphoto {
         .designbanner {
-          width: 500px;          // Reduced from 670px
-          height: 400px;         // Reduced from 480px
+          width: 500px; // Reduced from 670px
+          height: 400px; // Reduced from 480px
           background: white;
-          object-fit: contain;   // Added to maintain aspect ratio
+          object-fit: contain; // Added to maintain aspect ratio
 
           @include responsive(ipad-pro) {
             width: 100%;
             height: auto;
-            max-width: 500px;    // Reduced from 600px
-            aspect-ratio: 5/4;   // Changed ratio to match new dimensions
+            max-width: 500px; // Reduced from 600px
+            aspect-ratio: 5/4; // Changed ratio to match new dimensions
           }
 
           @include responsive(ipad-air) {
             width: 100%;
             height: auto;
-            max-width: 500px;    // Reduced from 670px
+            max-width: 500px; // Reduced from 670px
             aspect-ratio: 5/4;
           }
 
           @include responsive(tablet) {
             width: 100%;
             height: auto;
-            max-width: 500px;    // Reduced from 670px
+            max-width: 500px; // Reduced from 670px
             aspect-ratio: 5/4;
           }
         }

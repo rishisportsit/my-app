@@ -90,11 +90,11 @@ const About = () => {
           duration: "2 yrs 2 mos",
           location: "Hyderabad, Telangana, India · Remote",
           skills: [
-            "AIML", "Data Science", "Data Analysis", "Machine Learning", 
-            "MongoDB", "MySQL", "Next.js", "Git", "Artificial Intelligence (AI)", 
-            "Analytical Skills", "Python (Programming Language)", "REST APIs", 
-            "React.js", "Redux.js", "Node.js", "Project Management", 
-            "Swagger API", "Zustand", "Tailwind CSS"
+            "Front-end development", "HTML / CSS", "JavaScript",
+            "React.js", "Next.js", "React Native (kinda)",
+            "Redux.js", "Zustand", "Sass", "TailWind",
+            "Bootstrap", "Material-UI", "Back-end development",
+            "Node.js", "DataBase", "REST APIs", "Git", "Swagger API"
           ],
         },
         {
